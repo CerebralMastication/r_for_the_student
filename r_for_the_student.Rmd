@@ -6,7 +6,13 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(spongebob)
 ```
+
+```{r}
+tospongebob("This is Dusty's First Commit to Show I Could Connect My Studio to JD's Github!")
+```
+
 
 ## R Markdown
 
