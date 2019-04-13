@@ -14,6 +14,35 @@ tospongebob("This is Dusty's First Commit to Show I Could Connect My Studio to J
 ```
 
 
+## Dusty's Thoughts to flesh out somewhere
+
+When teaching, is the intent to teach coding in R, or is it to use R as an aide to teach statistics?  This will drive what you do and why you do it.  
+
+### What is the intent of teaching with R?
+
+I have taught advanced introduction to probability and statistics and used R as a tool to teach statistics.  We introduced it by showing how it can be a good calculator -- and along the way taught some of the R Studio functionality (projects/setting working directory, how to execute lines of code, save variables, etc).
+
+I have also taught sabermetrics where we taught coding in R.  So we needed to do data analysis (and we worked under the assumptions that our cadets knew basic statistics) so I taught the coding as a means of data analysis.
+
+### Do you "give stutents code"?
+
+You have two options: 
+
+1) Give students code before class.  
+
+The advantage here is that you can talk concepts and the syntax and inevitable mistyping, etc does not inhibit the larger purpose of the instruction.  
+
+The disadvantage is that students don't get intimate with the coding process and learn the necessary skill of trial and error.  
+
+2) Don't give them code and expect them to keep up.  
+
+The advantage is that cadets are learning the process of coding and "own" the code while they write it.  
+
+The disadvantage is instead of teaching concepts, students are distracted by keeping up with the coding and missing out on the statistics lesson
+
+My recommendation -- you give code if your intent is teaching statistics.  You don't give code if the intent is that cadets learn to code.  
+
+
 ## R Markdown
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
