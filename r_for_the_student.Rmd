@@ -8,22 +8,43 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Abstract
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+This article presents an introduction to the R language and computing environment for statistics. We make recommendations for both learners and teachers of R and share illustrations of how to use R to perform basic exploratory analysis and build a very basic econometric model. 
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+## Introduction 
 
-```{r cars}
-summary(cars)
-```
+## The R Ecosystem
 
-## Including Plots
+### CRAN 
 
-You can also embed plots, for example:
+### R Studio
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+### Tidyverse
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+## Installation
+
+paraphrase what's in R Cookbook?
+
+### Installing R
+
+### Installing R Studio
+
+### Installing the Tidyverse
+
+## Using R
+
+### Loading Data
+
+### Plotting 
+
+quick intro to ggplot
+
+That graphical tool for ggplot?
+
+
+### Plotting Multivariate Data
+
+ggpairs?
+
+
