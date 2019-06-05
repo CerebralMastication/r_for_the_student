@@ -1,0 +1,206 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={R for the Student},
+            pdfauthor={JD Long \& Dusty Turner},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{biblatex}
+
+\addbibresource{bibliography.bib}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\providecommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{R for the Student}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{JD Long \& Dusty Turner}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+    \date{}
+    \predate{}\postdate{}
+  
+
+\begin{document}
+\maketitle
+
+output: html\_document: citation\_package: biblatex keep\_tex: TRUE
+bibliography: bibliography.bib biblio-style: authoryear csl:
+chicago-note-bibliography.csl
+
+\subsection{Dusty's Thoughts to flesh out
+somewhere}\label{dustys-thoughts-to-flesh-out-somewhere}
+
+testing citation \autocite*{R-knitr} more typing
+
+testing citation \autocite*{R-rmarkdown} more typing
+
+testing citation \textcite{R-rmarkdown} cited inline
+
+When teaching, is the intent to teach coding in R, or is it to use R as
+an aide to teach statistics? This will drive what you do and why you do
+it.
+
+\subsubsection{What is the intent of teaching with
+R?}\label{what-is-the-intent-of-teaching-with-r}
+
+I have taught advanced introduction to probability and statistics and
+used R as a tool to teach statistics. We introduced it by showing how it
+can be a good calculator -- and along the way taught some of the R
+Studio functionality (projects/setting working directory, how to execute
+lines of code, save variables, etc).
+
+I have also taught sabermetrics where we taught coding in R. So we
+needed to do data analysis (and we worked under the assumptions that our
+cadets knew basic statistics) so I taught the coding as a means of data
+analysis.
+
+\subsubsection{\texorpdfstring{Do you ``give stutents
+code''?}{Do you give stutents code?}}\label{do-you-give-stutents-code}
+
+You have two options:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  Give students code before class.
+\end{enumerate}
+
+The advantage here is that you can talk concepts and the syntax and
+inevitable mistyping, etc does not inhibit the larger purpose of the
+instruction.
+
+The disadvantage is that students don't get intimate with the coding
+process and learn the necessary skill of trial and error.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Don't give them code and expect them to keep up.
+\end{enumerate}
+
+The advantage is that cadets are learning the process of coding and
+``own'' the code while they write it.
+
+The disadvantage is instead of teaching concepts, students are
+distracted by keeping up with the coding and missing out on the
+statistics lesson
+
+My recommendation -- you give code if your intent is teaching
+statistics. You don't give code if the intent is that cadets learn to
+code.
+
+\subsection{Abstract}\label{abstract}
+
+\subsection{Introduction}\label{introduction}
+
+\subsection{The R Ecosystem}\label{the-r-ecosystem}
+
+\subsubsection{CRAN}\label{cran}
+
+\subsubsection{R Studio}\label{r-studio}
+
+\subsubsection{Tidyverse}\label{tidyverse}
+
+\subsection{Installation}\label{installation}
+
+paraphrase what's in R Cookbook?
+
+\subsubsection{Installing R}\label{installing-r}
+
+\subsubsection{Installing R Studio}\label{installing-r-studio}
+
+\subsubsection{Installing the Tidyverse}\label{installing-the-tidyverse}
+
+\subsection{Using R}\label{using-r}
+
+\subsubsection{Loading Data}\label{loading-data}
+
+\subsubsection{Plotting}\label{plotting}
+
+quick intro to ggplot
+
+That graphical tool for ggplot?
+
+\subsubsection{Plotting Multivariate
+Data}\label{plotting-multivariate-data}
+
+ggpairs?
+
+\section{Bibliography}\label{bibliography}
+
+\textcite{R-knitr} \textcite{R-rmarkdown}
+
+\printbibliography
+
+
+\end{document}
