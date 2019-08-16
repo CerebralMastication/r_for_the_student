@@ -36,50 +36,50 @@ Each recipe addresses a specific problem and includes a discussion that explains
 
 ## Abstract
 
-## Introduction 
+## Introduction - Dusty
 
-## The R Ecosystem
+Motivation to learn/teach r / Purpose of paper
+Good thing is that there are all these addons
+
+
+## The R Ecosystem - JD
 
 ### CRAN 
 
-#### Downloading R
+Describe Base R install, CRAN pacakges, and RStudio
 
-In order to download R follow the following steps:
+### RStudio
 
-1) Visit <a href="http://cran.cnr.berkeley.edu" target="_blank">The Comprehensive R Archive Network (CRAN)</a> and click on one of the following:
+R Studio & Rstudio.cloud - how to  share a project for the class
 
-- `Download R for Windows`
-- `Download R for (Mac) OS X`
-- `Download R for Linux`
+### Tidyverse
 
-Depending on your operating system, you'll be taken to a different webpage to download a version of `R` that will work on your computer.  
+library(tidyverse) explain each package purpose
 
-2) If you chose Windows:  
+### Installation 
 
-- In the first line at the top of the page, select `install R for the first time`. 
-- **RIGHT CLICK** on the top link that should say `Download R 3.6 for Windows` (or something similar depending on the current version of R).  
-- Select `Save target as...` and save it to a folder that you can easily find.  
-- After the file has downloaded, execute the `.exe` file to install R.  Note: **You may have to right-click and `Run as administrator`.**
+an aside on how to do this on your personal computer - link to R Cookbook
 
-2) If you chose MAC:
+### Projects
 
-- Click on the link the link that sayw `R-3.6.0` (or something similar depending on the current version of R).  
-<!-- I don't really know what to do from here because the closest thing I have to an apple is an orange in my refrigerator -->
-
-3) If you chose Linux...
-<!-- just use an apple or mac... -->
+Directory structure in the project. 
 
 
-### R Studio
+## Tutorial begins - Dusty will start
 
-#### Downloading R-Studio
 
-In order to download R-Studio:
+Loading Data (Gapminder) - JD to pull data and put in repo
+Identifying data types
+Verbs (select, filter, mutate, group_by, summarize, arrange)
+Plotting/EDA
+Esquisse? - https://cran.r-project.org/web/packages/esquisse/readme/README.html
+Regression - parsnip/tidymodels
 
-1) Visit the <a href="https://www.rstudio.com/products/rstudio/download/" target="_blank">R-Studio Downloads</a> page.  
-2) Scroll down the page and **RIGHT CLICK** on the `installer file` for `RStudio 1.2.1335` (or something similar depending on the current version of R Studio) for the operating system you are curently using (Windows, Mac, Linux, etc).
-3) Select `Save target as...` and save the file to the same folder that you saved the previous R installation file.  
-4) After the file downloads, execute the `.exe` file and install R-Studio.  The first time that you attempt to open R-Studio you may have to search for the program through the search function on your computer.  Once you locate R-Studio, create a shortcut to save it in a location that is easy to find for future use.  
+
+
+### text from prior draft left below for salvaging
+
+
 
 #### R Studio Layout
 
