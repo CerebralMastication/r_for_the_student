@@ -16,13 +16,6 @@ link-citations: yes
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## notes to JD
-
-JD - I hacked away and figured out how to do citations inside RMD - an example is below.  You'll have to open up the `bibliography.bib` file to get the full picture.  This is the bibtex element of latex if you are not familiar.
-
-Also, I've had a lot of nights sleep and a lot of beer the night we talked about this.  I like the structure you have below - Is the aim of our article to talk to new users or to talk to people teaching new users.  I tentatively hammered out some stuff on talking to new users - but i feel like its easily transferrable/deletable if I am off track.  
-
-Also, I templated out how to install R/Rstudio -- but then I saw that you had it listed for a different location... and you also mentioned paraphrasing what is in the R Cookbook.  I don't think this is a bad idea.  I paraphrased what we have in our syllabus, ha.  Again, please feel free to hack/delete/move/etc.    
 
 ## An example of how to cite in R
 
@@ -68,12 +61,59 @@ Directory structure in the project.
 ## Tutorial begins - Dusty will start
 
 
-Loading Data (Gapminder) - JD to pull data and put in repo
-Identifying data types
-Verbs (select, filter, mutate, group_by, summarize, arrange)
-Plotting/EDA
+### Loading Data (Gapminder) 
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+
+gapminder <- read_csv("01_data/gapminder.csv")
+```
+Or directly from a URL:
+will be a 404 until the repo is public
+
+```{r message=FALSE, warning=FALSE}
+gapminder <- read_csv("https://github.com/CerebralMastication/r_for_the_student/blob/master/01_data/gapminder.csv")
+```
+
+
+### Identifying data types
+
+```{r}
+summary(gapminder)
+```
+
+Or using the skimr package
+```{r}
+library(skimr)
+skim(gapminder)
+
+```
+
+
+### `dplyr` Verbs 
+
+(select, filter, mutate, group_by, summarize, arrange)
+
+
+### Plotting/EDA
 Esquisse? - https://cran.r-project.org/web/packages/esquisse/readme/README.html
-Regression - parsnip/tidymodels
+
+
+### Regression 
+parsnip/tidymodels
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
