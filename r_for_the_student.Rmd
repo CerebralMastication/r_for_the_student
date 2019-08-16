@@ -1,5 +1,5 @@
 ---
-title: "R for the Student"
+title: "Applied R in the Classroom"
 author: "JD Long & Dusty Turner"
 output: 
   html_document:
