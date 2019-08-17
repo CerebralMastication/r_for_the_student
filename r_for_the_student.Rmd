@@ -34,34 +34,80 @@ Each recipe addresses a specific problem and includes a discussion that explains
 Motivation to learn/teach r / Purpose of paper
 Good thing is that there are all these addons
 
+I think we need to explain the difference between R & RStudio right in the intro. 
 
-## The R Ecosystem - JD
+## The R Ecosystem
+
+The advantages to using R whether in an academic setting or industry are myriad. Since R and RStudio IDE are both open source they have no financial costs to adoption. In addition, R has a very rich ecosystem of addon packages that expand R and add functionality to both R and the RStudio environment. These packages add features ranging from libraries to connect to commercial database systems to implementation of new machine learning algorithms. 
 
 ### CRAN 
 
-Describe Base R install, CRAN pacakges, and RStudio
+The online home of R is the Comprehensive R SOMETHING Network, CRAN. CRAN is where a new user can download R and access packages that expand the functionality of R. As of the August 2019 there are XXXX R packages hosted on CRAN for free download. Some new users to R are overwhelmed by the volume of packages. To help make sense of the CRAN ecosystem, CRAN has published CRAN Task Views which organize popular packages into categories of use (e.g. econometrics or spatial statistics). The task views are written and maintained by a subject matter expert. There are more than 35 such task views which can help new R users make sense of the packages availiable in their areas of interest and know which packages are recommended by an expert in their domain of interest. 
 
 ### RStudio
 
-R Studio & Rstudio.cloud - how to  share a project for the class
+When R is downloaded from CRAN, it comes with an engine for executing R code along with a few core packages for doing statistical analysis and graphics. Collectivly these tools are refered to as "Base R". Base R comes with a basic text editor for editing and executing R scprits. However most users quickly discover that writing R code is easier wiht an indtegrated developemnt environment (IDE). The most popular IDE for R is RStudio whcih we highly recommend for teaching.
 
-### Tidyverse
+INSERT RSTUDIO SCREEN SHOT
 
-library(tidyverse) explain each package purpose
+RStudio desktop can be downloaded for free from RStudio.com. In additon to the desktop IDE, RStudio makes a server based IDE for using R on remote machines. RStudio server also is availiable in a professional version that offers more features such as authentication and collaborative editing. RStudio offers its professional tools to academics for free. Go to http://XXXXXX for more info. 
 
-### Installation 
+For many instructors, the freely availiable RStudio.cloud service (http://rstudio.cloud) greatly simplifies instruction by providing a fully functional and configured R and RStudio environment running on cloud hosted hardware. For the rest of this article we will exclusivly use RStudio.cloud in our examples. Instructors can set up projects in RStudio.cloud and share those projects with students to simplify distributing cource material.
 
-an aside on how to do this on your personal computer - link to R Cookbook
+Instructors who don't want to use the cloud solutions, or can't because of connectivity restrictions can also download and install R and RStudio on local hardware. For details on downloading and installing, see section XXX in R Cookbook Second Edition, available online at http://rcse.com/xxxx 
 
 ### Projects
 
-Directory structure in the project. 
+RStudio introduces a powerful organizational tool called an RStudio Project.  Projects help you by doing the following:
+
+-  Storing  RStudio project settings
+-  Restoring window position in RStudio so when you return to a project you can pick up exactly where you left off
+-  Setting the working directory 
+
+RStudio creates a project file with an *.Rproj* extension in the project directory. RStudio also creates a hidden directory, *.Rproj.user*, for temporary files related to your projec
+
+We've found that helping students organieze their files using projects from the start helps them build good practices and prevent lost files and file path related issues that can flummox new learners. 
+
+### Tidyverse
+
+In addition to the RStudio IDE, the RStudio company supports the development of a number of open source packages designed to work together to make R easier to use and faster to learn. These libraries are collectivly known as the "Tidyverse". The most concise definition of the Tidyverse comes directly from its originator and core maintainer, Hadley Wickham:
+
+> The tidyverse is a set of packages that work in harmony because they share 
+> common data representations and API design. The tidyverse package is designed 
+> to make it easy to install and load core packages from the tidyverse in a 
+> single command. The best place to learn about all the packages in the 
+> tidyverse and how they fit together is *[R for Data Science](http://r4ds.had.co.nz)*.
+
+(https://blog.rstudio.com/2016/09/15/tidyverse-1-0-0/)
+
+The authors have had very good experiences with introducing laerners to the Tidyverse from the very beginning of the learning journey because these tools help learners see very quick successes which, in turn, keeps them engaged in the learning process. The popular plotting package `ggplot2` and the data manipulation package `dplyr` are both core Tidyverse packages. 
+
+The Tidyverse meta-package, like any CRAN package, can be installed from the R Console:
+
+```{r eval=FALSE, include=TRUE}
+install.packages("tidyverse")
+```
+
+***screen shot of install ***
+
+#### Tidyverse Packages
+When a user installs the Tidyverse, as illustrated above, XX packages are installed. Then when the user loads the tidyverse using `library(tidyverse)` a core subset of YY packages are loaded into R. To use any of the pacakges not loaded with the core Tidyverse a user must explicitly load those packages (e.g. `library(readxl)`) or call the packages using the package name prefix (e.g. `readxl::readxl()` to run the `readxl()` function from the `readxl` package) **JD pick a different example FFS**
+
+The tables below list which packages are in the "Core Tidyverse" and get loaded with `library(tidyverse)` and which must be called individually even though they are installed withe the Tidyverse meta-package. 
+
+***Core Tidyverse***
+
+
+
+***Additional Tidyverse***
+
+
 
 
 ## Tutorial begins - Dusty will start
 
 
-### Loading Data (Gapminder) 
+### Loading Data (Gapminder)
 
 ```{r message=FALSE, warning=FALSE}
 library(tidyverse)
@@ -71,7 +117,7 @@ gapminder <- read_csv("01_data/gapminder.csv")
 Or directly from a URL:
 will be a 404 until the repo is public
 
-```{r message=FALSE, warning=FALSE}
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
 gapminder <- read_csv("https://github.com/CerebralMastication/r_for_the_student/blob/master/01_data/gapminder.csv")
 ```
 
@@ -94,12 +140,26 @@ skim(gapminder)
 
 (select, filter, mutate, group_by, summarize, arrange)
 
+mention reshape?? or pivot/unpivot which i guess is the new hotness. 
 
 ### Plotting/EDA
-Esquisse? - https://cran.r-project.org/web/packages/esquisse/readme/README.html
+
+Typically before building any models or doing other analysis, students benefit from learning to do basic exploritory data analysis (EDA). One tool for quickly getting students a quick win with learning data visualization with `ggplot` is to use the package `esquisse` to give them a graphical user interface that helps them write `ggplot` code. 
+
+Since `esquisse` is a CRAN package, it can be installed by running `install.packages("esquisse")`. After installation, `esquisse` shows up in the *Addins* menu of RStudio:
+
+****screen shot of add in menu****
+
+The `'ggplot2' builder` menu option opens the graphical interface for building `ggplot2` graphics using a helper UI. Below is how the `esquisse` interface appears with the `gapminder` data selected:
+
+****esquisse screen shot****
+
+The strength of `esquisse` is that it produces the `ggplot2` code that allows the R learner to see how they can build the syntax themselves in the future. This gives students an increadible learning boost that reduces the likelyhood that they will get stuck when trying to make their first `ggplot2` figures. For more information about `esquisse` see the project CRAN web site: https://cran.r-project.org/web/packages/esquisse/readme/README.html
 
 
 ### Regression 
+**JD Note:** so I was taught regression analsis using $X'X^-1 (X'Y)$ and doing the matrix calculations. Worth mentioning? I'm not inclined but thought I'd mention it. 
+
 parsnip/tidymodels
 
 
