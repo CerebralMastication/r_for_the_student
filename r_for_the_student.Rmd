@@ -35,7 +35,7 @@ The Father of Modern Econometrics, Adam Smith, once frustratingly stated:
 
 Adam Smith is making the claim that methods of instruction used by professors are those which are easiest for the instructor, but not necessarily what is best for the student.  This is understandable, as research and other administive demands force instructors to rely on tried teaching techniques which are familiar to the teacher and not what will equip the student to be most successful in their career.
 
-The authors of this article will make the case that the R open sourse statistical programming languge can bridge this gap between a Smith's proverbial teacher's ease and a student's benefit.  As R continues to be one of the more popular coding languages in industry with ever increasing technical support, the barriar for entry keeps falling.  There are many tools available in R which can aide the teaching process to get students loading and exploring data quickly requiring low overhead for proficiency to teach.  With ample open source support, a wide acceptance in industry and many additional features to explore and present data, teaching with R is both satisfies the ease for the instructor and has long term benefit for the students.  
+The authors of this article will make the case that the R open sourse statistical programming languge can bridge this gap between a Smith's proverbial teacher's ease and a student's benefit.  As R continues to be one of the more popular coding languages in industry with ever increasing technical support, the barriar for entry keeps falling.  There are many tools available in R which can aide the teaching process to get students loading and exploring data quickly requiring low overhead for proficiency to teach.  With ample open source support, a wide acceptance in industry and many additional features to explore and present data, teaching with R both satisfies the ease for the instructor and has long term benefit for the students.  
 
 This is something we are certain Adam Smith would be proud of.
 
@@ -68,7 +68,7 @@ Instructors who don't want to use the cloud solutions, or can't because of conne
 
 RStudio introduces a powerful organizational tool called an RStudio Project.  Projects help you by doing the following:
 
--  Storing  RStudio project settings
+-  Storing RStudio project settings
 -  Restoring window position in RStudio so when you return to a project you can pick up exactly where you left off
 -  Setting the working directory 
 
@@ -99,17 +99,36 @@ install.packages("tidyverse")
 ***screen shot of install ***
 
 #### Tidyverse Packages
-When a user installs the Tidyverse, as illustrated above, XX packages are installed. Then when the user loads the tidyverse using `library(tidyverse)` a core subset of YY packages are loaded into R. To use any of the pacakges not loaded with the core Tidyverse a user must explicitly load those packages (e.g. `library(readxl)`) or call the packages using the package name prefix (e.g. `readxl::readxl()` to run the `readxl()` function from the `readxl` package) **JD pick a different example FFS**
+When a user installs the Tidyverse, as illustrated above, 19 packages are installed. Then when the user loads the tidyverse using `library(tidyverse)` a core subset of 8 packages are loaded into R. To use any of the pacakges not loaded with the core Tidyverse a user must explicitly load those packages (e.g. `library(readxl)`) or call the packages using the package name prefix (e.g. `readxl::read_xlsx()` to run the `read_xlsx()` function from the `readxl` package).
 
-The tables below list which packages are in the "Core Tidyverse" and get loaded with `library(tidyverse)` and which must be called individually even though they are installed withe the Tidyverse meta-package. 
+The packages listed below are in the "Core Tidyverse" and get loaded with `library(tidyverse)` and which must be called individually even though they are installed withe the Tidyverse meta-package. 
 
 ***Core Tidyverse***
 
-
+`ggplot2`: data visualisation
+`dplyr`: data manipulation
+`tidyr`: data reshaping
+`readr`: data import
+`purrr`: functional programming
+`tibble`: tidy dataframes
+`stringr`: string manipulation
+`forcats`: factor use
 
 ***Additional Tidyverse***
 
+There are 11 additional Tidyverse packages that get installed, but not automatically loaded. These add specialized functions for more specialized uses.
 
+Date and time manipulation:
+
+`hms` & `lubridate`
+
+Model building and output manipulation:
+`modelr` & `broom`
+
+Data inport:
+`feather`, `haven`, `httr`, `jsonlite`, `readxl`, `rvest`, and `ml2`
+
+More info on each can be found at https://tidyverse.tidyverse.org
 
 
 ## Tutorial begins - Dusty will start
