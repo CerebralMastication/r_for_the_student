@@ -56,11 +56,13 @@ The online home of R is the Comprehensive R SOMETHING Network, CRAN. CRAN is whe
 
 When R is downloaded from CRAN, it comes with an engine for executing R code along with a few core packages for doing statistical analysis and graphics. Collectivly these tools are refered to as "Base R". Base R comes with a basic text editor for editing and executing R scprits. However most users quickly discover that writing R code is easier wiht an indtegrated developemnt environment (IDE). The most popular IDE for R is RStudio whcih we highly recommend for teaching.
 
-INSERT RSTUDIO SCREEN SHOT
-
 RStudio desktop can be downloaded for free from RStudio.com. In additon to the desktop IDE, RStudio makes a server based IDE for using R on remote machines. RStudio server also is availiable in a professional version that offers more features such as authentication and collaborative editing. RStudio offers its professional tools to academics for free. Go to http://XXXXXX for more info. 
 
 For many instructors, the freely availiable RStudio.cloud service (http://rstudio.cloud) greatly simplifies instruction by providing a fully functional and configured R and RStudio environment running on cloud hosted hardware. For the rest of this article we will exclusivly use RStudio.cloud in our examples. Instructors can set up projects in RStudio.cloud and share those projects with students to simplify distributing cource material.
+
+```{r icons, fig.cap='RStudio.cloud', echo=FALSE, eval=TRUE}
+knitr::include_graphics("03_figures/rstudio.cloud.png")
+```
 
 Instructors who don't want to use the cloud solutions, or can't because of connectivity restrictions can also download and install R and RStudio on local hardware. For details on downloading and installing, see section XXX in R Cookbook Second Edition, available online at http://rcse.com/xxxx 
 
