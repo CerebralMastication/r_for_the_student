@@ -3,9 +3,9 @@ title: "Applied R in the Classroom"
 author: "JD Long & Dusty Turner"
 bibliography: bibliography.bib
 output:
-  pdf_document: default
   html_document:
     citation_package: biblatex
+  pdf_document: default
 keep_tex: yes
 link-citations: yes
 csl: chicago-library-list.csl
@@ -140,7 +140,6 @@ More info on each can be found at https://tidyverse.tidyverse.org
 
 ```{r message=FALSE, warning=FALSE}
 library(tidyverse)
-
 gapminder <- read_csv("01_data/gapminder.csv")
 ```
 Or directly from a URL:
@@ -150,24 +149,62 @@ will be a 404 until the repo is public
 gapminder <- read_csv("https://github.com/CerebralMastication/r_for_the_student/blob/master/01_data/gapminder.csv")
 ```
 
+A third option would be to download the gapminder data from the website listed above then refrence the location from the location on your computer.
+
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+gapminder <- read_csv("/file/path/to/your/document/gapminder.csv")
+```
 
 ### Identifying data types
+
+When reading in data, the `read_csv` command does the best it can to identify the datatype of each column of data.  
+
+Simply outputting the code can tell us a bundle of information about the data we have just loaded.  Lets look at the output below.
+
+```{r eval=TRUE, message=FALSE, warning=FALSE,include=TRUE}
+gapminder
+```
+
+From the output below, the `gapminder` dataset is a `tibble` consisting of 1,704 observational units with 6 columns of information.  The data type of each colum is listed below the column name.  We can see that we have a mix of `character`s and `double`s.  
+
+<!-- May need to flesh out what a tibble/doube are.  Do you think we should have a definitions section at the end? -->
+
+You'll also notice that printing out the data does not tell you all the information you'd like to know.  You'll realize that your data has information about countries, but are they all Afghanistan?  Likely no, as you can see there are 1,694 more rows and they probably are not all Afghanistan.  Lets look at other ways to understand your data. 
 
 ```{r, warning=FALSE}
 summary(gapminder)
 ```
 
-Or using the skimr package
+You can see that this output gives us more information.  For all `numeric` columns, R tells us the range of the data with breaks at each quarters.  However, we are still left wanting.
+
+We recommend using the `skim` command from the `skimr` library.  You may need to download the `skimr` package from CRAN.
+
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
+install.packages("skimr")
+```
+
 ```{r, warning=FALSE}
 library(skimr)
 skim(gapminder)
-
 ```
 
+This gives us a much better view of the data.  `skim` breaks the data apart by variable type giving us important information for each data type.  
+
+For each class of data (`character`/`numeric`), `skim` tells us how many missing , complete, and total (n) observations for each column.
+
+For the character class `skim` provides additional information about each column.  This includes the min/max length of each character string as well as the number of unique (n_unique) observations.  
+
+For the numeric class, `skim` provides mean, standard deviation (sd), and percentile breaks (p0, p25,...,p100).  It also provides a small histogram to help visualize the distribution of your numeric data (hist).
+
+This likely does not satisfy the user's desire to understand the data as we still do not understand which counties are in the data among other curiosities.  We will provide more indepth methods of understanding your data in the Exploratory Data Analysis (EDA) section of this paper.   
 
 ### `dplyr` Verbs 
 
-(select, filter, mutate, group_by, summarize, arrange)
+Almost any time a user is working with data, they will need to manipulate that data in some way.  In this next section, we will introduce the main 6 `dplyr` verbs to help wrangle data to gain additional insight.  These verbs, `select`, `filter`, `mutate`, `group_by`, `summarize`, `arrange` are explained in detail below.  
+
+In order to motivate use of the aformentioned verbs, we'll look to answer the following question
+
+#### `select`
 
 mention reshape?? or pivot/unpivot which i guess is the new hotness. 
 
