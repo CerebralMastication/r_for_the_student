@@ -3,9 +3,10 @@ title: "Applied R in the Classroom"
 author: "JD Long & Dusty Turner"
 bibliography: bibliography.bib
 output:
+  word_document: default
+  pdf_document: default
   html_document:
     citation_package: biblatex
-  pdf_document: default
 keep_tex: yes
 link-citations: yes
 csl: chicago-library-list.csl
@@ -43,7 +44,7 @@ This is something we are certain Adam Smith would be proud of.
 <!-- Good thing is that there are all these addons -->
 
 I think we need to explain the difference between R & RStudio right in the intro. 
-
+Dusty Note: refrensing your comment above, do the subsections below accomplish this purpose or should we do more in the intro?
 ## The R Ecosystem
 
 The advantages to using R whether in an academic setting or industry are myriad. Since R and RStudio IDE are both open source they have no financial costs to adoption. In addition, R has a very rich ecosystem of addon packages that expand R and add functionality to both R and the RStudio environment. These packages add features ranging from libraries to connect to commercial database systems to implementation of new machine learning algorithms. 
@@ -90,7 +91,7 @@ In addition to the RStudio IDE, the RStudio company supports the development of 
 
 (https://blog.rstudio.com/2016/09/15/tidyverse-1-0-0/)
 
-The authors have had very good experiences with introducing laerners to the Tidyverse from the very beginning of the learning journey because these tools help learners see very quick successes which, in turn, keeps them engaged in the learning process. The popular plotting package `ggplot2` and the data manipulation package `dplyr` are both core Tidyverse packages. 
+The authors have had very good experiences with introducing learners to the Tidyverse from the very beginning of the learning journey because these tools help learners see very quick successes which, in turn, keeps them engaged in the learning process. The popular plotting package `ggplot2` and the data manipulation package `dplyr` are both core Tidyverse packages. 
 
 The Tidyverse meta-package, like any CRAN package, can be installed from the R Console:
 
@@ -121,7 +122,6 @@ The packages listed below are in the "Core Tidyverse" and get loaded with `libra
 There are 11 additional Tidyverse packages that get installed, but not automatically loaded. These add specialized functions for more specialized uses.
 
 Date and time manipulation:
-
 `hms` & `lubridate`
 
 Model building and output manipulation:
@@ -132,34 +132,49 @@ Data inport:
 
 More info on each can be found at https://tidyverse.tidyverse.org
 
+## Harnessing The Power of R and the Tidyverse 
 
-## Tutorial begins - Dusty will start
-
+In the following sections, we will highlight some of the features of R and the `tidyverse` and how they can be useful in both a classroom and research setting.  
 
 ### Loading Data (Gapminder)
+
+To aide our example, we will explore the Gapminder data set.  The Gapminder dataset is created by the Gapminder Foundation which is a non-profit which promots sustainable global development.  [@Gapminder]
+
+The data is available in the following options.
+
+<!-- I assume we won't include this next chunk in the paper? -->
 
 ```{r message=FALSE, warning=FALSE}
 library(tidyverse)
 gapminder <- read_csv("01_data/gapminder.csv")
 ```
-Or directly from a URL:
-will be a 404 until the repo is public
+
+Directly from a URL:
+<!-- will be a 404 until the repo is public -->
 
 ```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
 gapminder <- read_csv("https://github.com/CerebralMastication/r_for_the_student/blob/master/01_data/gapminder.csv")
 ```
 
-A third option would be to download the gapminder data from the website listed above then refrence the location from the location on your computer.
+A second option would be to download the gapminder data from the website listed above then refrence the location from the location on your computer.
 
 ```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
 gapminder <- read_csv("/file/path/to/your/document/gapminder.csv")
+```
+
+Once the student reads the the data into R, the environment tab in the top right of the computer will reflect that the data is loaded.  
+
+<!-- I'll add this image once I get to my home computer.  For some reason I don't have privledges to access the snipping tool at work... -->
+
+```{r icons, fig.cap='Environment With Gapminder Data', echo=FALSE, eval=TRUE}
+knitr::include_graphics("03_figures/environment.png")
 ```
 
 ### Identifying data types
 
 When reading in data, the `read_csv` command does the best it can to identify the datatype of each column of data.  
 
-Simply outputting the code can tell us a bundle of information about the data we have just loaded.  Lets look at the output below.
+Simply outputting the code can tell students a bundle of information about the data just loaded.  Lets look at the output below.
 
 ```{r eval=TRUE, message=FALSE, warning=FALSE,include=TRUE}
 gapminder
@@ -169,7 +184,7 @@ From the output below, the `gapminder` dataset is a `tibble` consisting of 1,704
 
 <!-- May need to flesh out what a tibble/doube are.  Do you think we should have a definitions section at the end? -->
 
-You'll also notice that printing out the data does not tell you all the information you'd like to know.  You'll realize that your data has information about countries, but are they all Afghanistan?  Likely no, as you can see there are 1,694 more rows and they probably are not all Afghanistan.  Lets look at other ways to understand your data. 
+You'll also notice that printing out the data does not tell you all the information you'd like to know.  You'll realize that your data has information about countries, but are they all Afghanistan?  Likely no, as you can see there are 1,694 more rows and they probably are not all Afghanistan.  Lets look at other ways to understand the data. 
 
 ```{r, warning=FALSE}
 summary(gapminder)
@@ -183,7 +198,7 @@ We recommend using the `skim` command from the `skimr` library.  You may need to
 install.packages("skimr")
 ```
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, message=FALSE}
 library(skimr)
 skim(gapminder)
 ```
@@ -198,15 +213,100 @@ For the numeric class, `skim` provides mean, standard deviation (sd), and percen
 
 This likely does not satisfy the user's desire to understand the data as we still do not understand which counties are in the data among other curiosities.  We will provide more indepth methods of understanding your data in the Exploratory Data Analysis (EDA) section of this paper.   
 
-### `dplyr` Verbs 
+### `dplyr` Verbs
 
 Almost any time a user is working with data, they will need to manipulate that data in some way.  In this next section, we will introduce the main 6 `dplyr` verbs to help wrangle data to gain additional insight.  These verbs, `select`, `filter`, `mutate`, `group_by`, `summarize`, `arrange` are explained in detail below.  
 
-In order to motivate use of the aformentioned verbs, we'll look to answer the following question
+In order to motivate use of the aformentioned verbs, we'll look to answer the following question: What is the average GDP per country since 1980?
 
-#### `select`
+#### Verb 1: `select`
 
-mention reshape?? or pivot/unpivot which i guess is the new hotness. 
+To begin, we only need to work with certain columns.  The relevent columns to this question are `country`, `year`, `pop`, and `gdpPercap`.  We can make this selection using the `select` function.  The first argument in the `select` function is the data we which to select from.  The subsequent arguments are the names of the columns from the data we wish to select.  In the code below, we save our selected columns into a new tibble called `gapminder_selected`.
+
+```{r}
+gapminder_selected = 
+  select(gapminder,country,year,pop,gdpPercap)
+gapminder_selected
+```
+
+Once we view the data, we see that we now have 1704 rows with 4 columns.  
+
+#### Verb 2: `filter`
+
+To further answer our question, we need to filter our data down to the years of interest.  We can achieve this goal using the `filter` function.  Like the `select` function, the first argument in the `filter` function is the data and subsequent argument is the logical statement of which you wish to filter the data.  In the code below, we filter our selected data and save our filtered data into a new tibble called `gapminder_filtered`.
+
+```{r}
+gapminder_filtered =
+  filter(gapminder_selected, year >= 1980)
+gapminder_filtered
+```
+
+Once we view the data, we see that our data now consist of years since 1980.
+
+#### Verb 3: `mutate`
+
+The next step in answering our question is creating a column that contains the information of interest.  The `mutate` function creats new columns according to a specific function that we provide.  To answer our question, we need to determine the GDP in each year.  To find the GDP, we need to multiply the `gdpPercap` by the `pop`.  Similar to the previou two verbs, the first argument in the `mutate` function is the data.  Subsequent arguments are columns you wish to create with corresponding formulas.  In the code below, we mutate our filtered data and save our mutated data into a new tibble called `gapminder_mutated`.
+
+```{r}
+gapminder_mutated = 
+  mutate(gapminder_filtered, GDP = gdpPercap * pop)
+gapminder_mutated
+```
+
+Once we view the data, we see the new column, GDP, has been added to the end of our tibble.  
+
+#### Verb 4: `group_by`
+
+The next step in answering our question will be to group our data by the topic of interest.  In this instance, since we want to know GDP by country, we need to group or data by country.  A way to conceptualize this step is to think of placing each group of data into a specific room.  In subsequent steps we will apply a function to each group of data.  Just like the previous verbs, the first argument in the `group_by` function is the data.  The following arguments are the columns you wish to group by.  In the code below, we group our mutated data and save our grouped data into a new tibble called `gapminder_grouped`.
+
+```{r}
+gapminder_grouped = 
+  group_by(gapminder_mutated, country) 
+gapminder_grouped
+```
+
+The reader will notice that there apears to be no change to the data.  This is mostly true as we have simply told R that we would like to apply future functions over each group of data instead of over the entire tibble.  The only difference in output is the a note explaining the what the data has been grouped into and the number of groups.  In this case, it explains the data is grouped by `continent` and that there are 5 groups.  
+
+#### Verb 5: `summarise`
+
+Next in order to determine the average GDP by country, we need to apply a function to each group we have identified.  In this instance, we will need to take the average GDP over each continent.  Since we've already grouped by country, we simply need to apply the summarise function.  Like the previous verbs, the first argument in the `summarise` function is the data.  The following arguments are the function you would like to apply to each group.  In the code below, we summarise our grouped data and save our summarised data into a new tibble called `gapminder_summarised`.
+
+```{r}
+gapminder_summarised =
+  summarise(gapminder_grouped, AVG_GDP = mean(GDP))
+gapminder_summarised
+```
+
+We now have an answer to our question.  The tibble above shows the average GDP per country since 1980.  
+
+#### Verb 6: `arrange`
+
+However, we can refine our data to provide more inisght.  Currently, our data is sorted alphabetically by country.  This does not provide much insight.  We can use the `arrange` function to sort the data by average GDP; both assending and descending.  Like all other verbs, the first argument in the `arrange` function is the data.  The following argument is the column you wish to sort by.  In the code below, we arrange our summarised data and save our arranged data into a new tibble called `gapminder_arranged`.
+
+```{r}
+gapminder_arragned = 
+  arrange(gapminder_summarised, AVG_GDP)
+gapminder_arragned
+```
+
+We see, from the output above, the countries with the smalled average GDP since 1980.  
+
+It may be more interesting, however, to sort the average GDP in descending order so we can learn the countries with the highest average GDP.  To do this we simply place a `-` sign in front of `AVG_GDP` in the call above.  
+
+```{r}
+gapminder_arragned_descending = 
+  arrange(gapminder_summarised, -AVG_GDP)
+gapminder_arragned_descending
+```
+
+From the preceeding example, you can see how to gain insight from data by manipulating the tibble with `dplyr` verbs.  A more helpful way to gain insight from data is by viewing it graphically.  We'll go over plotting basics 
+
+<!-- mention reshape?? or pivot/unpivot which i guess is the new hotness.  -->
+<!-- So, potentially.  We are actually already well over 4,000 words at this point and 13 pages if you render in word. (I can't render PDF at work because I can't download mctex).  
+
+We also need some of the remaining words for the plotting/regression sections, I think.  
+
+Also, when you mention reshape, do are talking about the same functionality as gather/spread?  I'm more familiar with those. -->
 
 ### Plotting/EDA
 
@@ -228,6 +328,9 @@ The strength of `esquisse` is that it produces the `ggplot2` code that allows th
 
 parsnip/tidymodels
 
+```{r}
+gapminder
+```
 
 
 
