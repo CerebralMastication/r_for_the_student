@@ -272,7 +272,7 @@ Many new users also make the mistke of not realizing that they have not opened u
 
 Possibly note on how to execute lines of code.  Both code chuncks and specific lines of code. 
 
-### Tidyverse
+### Tidyverse 
 
 ## Installation
 
