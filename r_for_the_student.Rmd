@@ -324,13 +324,21 @@ The strength of `esquisse` is that it produces the `ggplot2` code that allows th
 
 
 ### Regression 
-**JD Note:** so I was taught regression analsis using $X'X^-1 (X'Y)$ and doing the matrix calculations. Worth mentioning? I'm not inclined but thought I'd mention it. 
+<!-- **JD Note:** so I was taught regression analsis using $X'X^-1 (X'Y)$ and doing the matrix calculations. Worth mentioning? I'm not inclined but thought I'd mention it.  -->
 
-parsnip/tidymodels
+While there are many statistical applications in Econometrics we'll highlight Simple Linear Regression which is just one of many tools in R's arsonel.  
 
-```{r}
-gapminder
-```
+
+<!-- I would very much like to use parsnip, however, I cannot find how to output the summary of the model.  I think this is important to show, especially if we are trying to convence readers to use R. -->
+<!-- parsnip/tidymodels -->
+
+<!-- ```{r} -->
+<!-- # install.packages("parsnip") -->
+<!-- library(parsnip) -->
+<!-- linear_reg() %>% -->
+<!--   set_engine("lm") %>% -->
+<!--   fit(lifeExp~gdpPercap, data = gapminder) -->
+<!-- ``` -->
 
 
 
