@@ -16,6 +16,7 @@ biblio-style: authoryear
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+options(scipen = 999)
 ```
 
 
@@ -43,8 +44,9 @@ This is something we are certain Adam Smith would be proud of.
 <!-- Motivation to learn/teach r / Purpose of paper -->
 <!-- Good thing is that there are all these addons -->
 
-I think we need to explain the difference between R & RStudio right in the intro. 
-Dusty Note: refrensing your comment above, do the subsections below accomplish this purpose or should we do more in the intro?
+<!-- I think we need to explain the difference between R & RStudio right in the intro.  -->
+<!-- Dusty Note: refrensing your comment above, do the subsections below accomplish this purpose or should we do more in the intro? -->
+
 ## The R Ecosystem
 
 The advantages to using R whether in an academic setting or industry are myriad. Since R and RStudio IDE are both open source they have no financial costs to adoption. In addition, R has a very rich ecosystem of addon packages that expand R and add functionality to both R and the RStudio environment. These packages add features ranging from libraries to connect to commercial database systems to implementation of new machine learning algorithms. 
@@ -167,7 +169,7 @@ Once the student reads the the data into R, the environment tab in the top right
 <!-- I'll add this image once I get to my home computer.  For some reason I don't have privledges to access the snipping tool at work... -->
 
 ```{r icons2, fig.cap='Environment With Gapminder Data', echo=FALSE, eval=TRUE}
-# knitr::include_graphics("03_figures/environment.png")
+knitr::include_graphics("03_figures/environment.png")
 ```
 
 ### Identifying data types
@@ -180,7 +182,7 @@ Simply outputting the code can tell students a bundle of information about the d
 gapminder
 ```
 
-From the output below, the `gapminder` dataset is a `tibble` consisting of 1,704 observational units with 6 columns of information.  The data type of each colum is listed below the column name.  We can see that we have a mix of `character`s and `double`s.  
+From the output above, one can see the `gapminder` dataset is a `tibble` consisting of 1,704 observational units with 6 columns of information.  The data type of each colum is listed below the column name.  We can see that we have a mix of `character`s and `double`s.  
 
 <!-- May need to flesh out what a tibble/doube are.  Do you think we should have a definitions section at the end? -->
 
@@ -310,7 +312,7 @@ Also, when you mention reshape, do are talking about the same functionality as g
 
 ### Plotting/EDA
 
-Typically before building any models or doing other analysis, students benefit from learning to do basic exploritory data analysis (EDA). One tool for quickly getting students a quick win with learning data visualization with `ggplot` is to use the package `esquisse` to give them a graphical user interface that helps them write `ggplot` code. 
+Typically before building any models or doing other analysis, students benefit from learning to do basic exploritory data analysis (EDA). One tool for getting students a quick win with learning data visualization with `ggplot` is to use the package `esquisse` to give them a graphical user interface that helps them write `ggplot` code. 
 
 Since `esquisse` is a CRAN package, it can be installed by running `install.packages("esquisse")`. After installation, `esquisse` shows up in the *Addins* menu of RStudio:
 
@@ -326,19 +328,27 @@ The strength of `esquisse` is that it produces the `ggplot2` code that allows th
 ### Regression 
 <!-- **JD Note:** so I was taught regression analsis using $X'X^-1 (X'Y)$ and doing the matrix calculations. Worth mentioning? I'm not inclined but thought I'd mention it.  -->
 
-While there are many statistical applications in Econometrics we'll highlight Simple Linear Regression which is just one of many tools in R's arsonel.  
+While there are many statistical applications in Econometrics, we'll highlight Simple Linear Regression which is just one of many tools in R's arsonel.  
 
+Using the `parsnip` package from the `tidymodels` family of packages, we can easily create a linear model and extract the regression coefficience and P Values.  
 
-<!-- I would very much like to use parsnip, however, I cannot find how to output the summary of the model.  I think this is important to show, especially if we are trying to convence readers to use R. -->
-<!-- parsnip/tidymodels -->
+In the example below, we do the following:
 
-<!-- ```{r} -->
-<!-- # install.packages("parsnip") -->
-<!-- library(parsnip) -->
-<!-- linear_reg() %>% -->
-<!--   set_engine("lm") %>% -->
-<!--   fit(lifeExp~gdpPercap, data = gapminder) -->
-<!-- ``` -->
+1) Specify the model type:  In this instance, we specify linear regression with the `linear_reg()` fuction
+2) Specify the engine:  In the `set_engine` function we specify the computational engine.  In this instance, we are using base R's linear regression function.  
+3) Specify the 'fit' of the model:  In this case, we regress `lifeExp` on `gdpPercap`.
+
+Lastly, we request the the summary of the model using the `tidy` command.  We see the traditional output with the regression coeficients, standard error, test statistic, and P Values.
+
+```{r, include=TRUE, eval=TRUE}
+# install.packages("parsnip")
+library(parsnip)
+library(broom)
+linear_reg() %>%
+  set_engine("lm") %>%
+  fit(lifeExp~gdpPercap, data = gapminder) %>%
+  tidy() 
+```
 
 
 
