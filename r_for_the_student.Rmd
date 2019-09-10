@@ -3,10 +3,10 @@ title: "Applied R in the Classroom"
 author: "JD Long & Dusty Turner"
 bibliography: bibliography.bib
 output:
-  word_document: default
-  pdf_document: default
   html_document:
     citation_package: biblatex
+  pdf_document: default
+  word_document: default
 keep_tex: yes
 link-citations: yes
 csl: chicago-library-list.csl
@@ -166,8 +166,8 @@ Once the student reads the the data into R, the environment tab in the top right
 
 <!-- I'll add this image once I get to my home computer.  For some reason I don't have privledges to access the snipping tool at work... -->
 
-```{r icons, fig.cap='Environment With Gapminder Data', echo=FALSE, eval=TRUE}
-knitr::include_graphics("03_figures/environment.png")
+```{r icons2, fig.cap='Environment With Gapminder Data', echo=FALSE, eval=TRUE}
+# knitr::include_graphics("03_figures/environment.png")
 ```
 
 ### Identifying data types
