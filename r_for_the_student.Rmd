@@ -5,8 +5,8 @@ bibliography: bibliography.bib
 output:
   html_document:
     citation_package: biblatex
-  pdf_document: default
   word_document: default
+  pdf_document: default
 keep_tex: yes
 link-citations: yes
 csl: chicago-library-list.csl
@@ -37,6 +37,8 @@ Adam Smith is making the claim that methods of instruction used by professors ar
 
 The authors of this article will make the case that the R open sourse statistical programming languge can bridge this gap between a Smith's proverbial teacher's ease and a student's benefit.  As R continues to be one of the more popular coding languages for statistical analysis with ever increasing technical support, the barriar for entry keeps falling.  There are many tools available in R which can aide the teaching process to get students loading and exploring data quickly with manageable overhead for the instructor.  With ample open source support, a wide acceptance in industry, and many additional features to explore and present data, teaching with R both satisfies the ease for the instructor and has long term benefit for the students.  
 
+<!-- do you think it would be benificial to show some sort of graphic of r growth over time? if you think it worth it, I can pull data from stack overflow of r tag increases over time. -->
+
 This is something we are certain Adam Smith would be proud of.
 
 ## The R Ecosystem
@@ -53,7 +55,7 @@ When R is downloaded from CRAN, it comes with an engine for executing R code alo
 
 RStudio desktop can be downloaded for free from RStudio.com. In additon to the desktop IDE, RStudio makes a server based IDE for using R on remote machines. RStudio server also is availiable in a professional version that offers more features such as authentication and collaborative editing. RStudio offers its professional tools to academics for free. Go to https://www.rstudio.com/pricing/academic-pricing/ for more info. 
 
-For many instructors, the freely availiable RStudio.cloud service (http://rstudio.cloud) greatly simplifies instruction by providing a fully functional and configured R and RStudio environment running on cloud hosted hardware. For the rest of this article we will exclusivly use RStudio.cloud in our examples. Instructors can set up projects in RStudio.cloud and share those projects with students to simplify distributing cource material.
+For many instructors, the freely availiable RStudio.cloud service (http://rstudio.cloud) greatly simplifies instruction by providing a fully functional and configured R and RStudio environment running on cloud hosted hardware. For the rest of this article we will exclusivly use RStudio.cloud in our examples. Instructors can set up projects in RStudio.cloud and share those projects with students to simplify distributing course material.
 
 ```{r icons, fig.cap='RStudio.cloud', echo=FALSE, eval=TRUE}
 knitr::include_graphics("03_figures/rstudio.cloud.png")
@@ -100,39 +102,58 @@ The packages listed below are in the "Core Tidyverse" and get loaded with `libra
 
 ***Core Tidyverse***
 
-`ggplot2`: data visualisation
-`dplyr`: data manipulation
-`tidyr`: data reshaping
-`readr`: data import
-`purrr`: functional programming
-`tibble`: tidy dataframes
-`stringr`: string manipulation
-`forcats`: factor use
+`ggplot2`: data visualisation  
+`dplyr`: data manipulation  
+`tidyr`: data reshaping  
+`readr`: data import  
+`purrr`: functional programming  
+`tibble`: tidy dataframes  
+`stringr`: string manipulation  
+`forcats`: factor use  
 
 ***Additional Tidyverse***
 
 There are 11 additional Tidyverse packages that get installed, but not automatically loaded. These add specialized functions for more specialized uses.
 
-Date and time manipulation:
+<!-- which do you like better?  This? -->
+
+Date and time manipulation:  
 `hms` & `lubridate`
 
-Model building and output manipulation:
+Model building and output manipulation:  
 `modelr` & `broom`
 
-Data inport:
+Data inport:  
 `feather`, `haven`, `httr`, `jsonlite`, `readxl`, `rvest`, and `ml2`
+
+<!-- or this? -->
+
+`hms`: time manipulation
+`lubridate`: date manipulation  
+`modelr`: model building  
+`broom`: output manipulation  
+`feather`: reading / writing data
+`haven`: reading / writing data
+`httr`: accessing html
+`jsonlite`: JSON manipulation
+`readxl`: reading Excel files
+`rvest`: scrape html data
+`ml2`: Data inport  
+<!-- idk what ml2 is.... -->
+
 
 More info on each can be found at https://tidyverse.tidyverse.org
 
 ## Harnessing The Power of R and the Tidyverse 
 
-In the following sections, we will highlight some of the features of R and the `tidyverse` and how they can be useful in both a classroom and research setting.  
+In the following sections, we will highlight some of the features of R and the `tidyverse` and how they can be useful in a classroom setting while teaching new students.  
 
 ### Loading Data (Gapminder)
 
-To aide our example, we will explore the Gapminder data set.  The Gapminder dataset is created by the Gapminder Foundation which is a non-profit which promots sustainable global development.  https://www.gapminder.org
+To aide our instructions, we will explore the Gapminder data set.  The Gapminder dataset is created by the Gapminder Foundation which is a non-profit which promots sustainable global development.  https://www.gapminder.org
 
 Showing students how to load in example data is a crucial first step. Data can be easily loaded from the local file system:
+
 ```{r message=FALSE, warning=FALSE}
 library(tidyverse)
 gapminder <- read_csv("01_data/gapminder.csv")
@@ -151,9 +172,7 @@ Once the student reads the the data into R, the environment tab in the top right
 knitr::include_graphics("03_figures/environment.png")
 ```
 
-### Identifying data types
-
-When reading in data, the `read_csv` command does the best it can to identify the datatype of each column of data.  
+### Initial Data Exploration
 
 Simply outputting the code can tell students a bundle of information about the data just loaded.  Lets look at the output below.
 
@@ -161,9 +180,9 @@ Simply outputting the code can tell students a bundle of information about the d
 gapminder
 ```
 
-From the output above, one can see the `gapminder` dataset is a `tibble` consisting of 1,704 observational units with 6 columns of information.  The data type of each colum is listed below the column name.  We can see that we have a mix of `character`s and `double`s. A `tibble` is a Tidyverse take on R's traditional `data.frame`. We've found that it usually is sufficient to tell students that `tibble` is a table. Since the goal is to get students using data to *do* things we often don't spend excessive time on definitions and instead focus on getting students doing something interesting. 
+From the output above, one can see the `gapminder` dataset is a `tibble` consisting of 1,704 observational units with 6 columns of information. When reading in data, the `read_csv` command identifies the most likely class of data for each column lists the class below the column name.  We can see that we have a mix of `character`s and `double`s. A `tibble` is a Tidyverse take on R's traditional `data.frame`. We've found that it usually is sufficient to tell students that `tibble` is a table. Since the goal is to get students using data to *do* things we often don't spend excessive time on definitions and instead focus on getting students doing something interesting. 
 
-You'll also notice that printing out the data does not tell you all the information you'd like to know.  One can see that the data has information about countries, but are they all Afghanistan?  Likely no, as you can see there are 1,694 more rows and they probably are not all Afghanistan.  Lets look at other ways to understand the data. 
+Students also notice that printing out the data does not provude all the information they would like to know.  One can see that the data has information about countries, but are they all Afghanistan?  Likely no, as you can see there are 1,694 more rows and they probably are not all Afghanistan.  Lets look at other ways to understand the data. 
 
 We recommend using the `skim` command from the `skimr` library.  You may need to download the `skimr` package from CRAN.
 
@@ -171,26 +190,38 @@ We recommend using the `skim` command from the `skimr` library.  You may need to
 install.packages("skimr")
 ```
 
+<!-- What is your hack to make the histograms print out correctly? -->
+
 ```{r, warning=FALSE, message=FALSE}
 library(skimr)
 skim(gapminder)
 ```
 
-This gives us a much better view of the data.  `skim` breaks the data apart by variable type giving us important information for each data type.  
+This gives students a much better view of the data.  `skim` seperates the data by class and provides important information for each data type.  We find that the `skim` function gives students the quickest and best description of the data.  Other options of presenting detailed information about the data include the `summary(gapminder)`, `glimse(gapminder)`, and `str(gapminder)`
 
-For each class of data (`character`/`numeric`), `skim` tells us how many missing , complete, and total (n) observations for each column.
+In the output above, for each class of data (`character`/`numeric`), `skim` provides how many missing, complete, and total (n) observations for each column.
 
-For the character class `skim` provides additional information about each column.  This includes the min/max length of each character string as well as the number of unique (n_unique) observations.  
+For the character class, `skim` provides additional information about each column.  This includes the min/max length of each character string as well as the number of unique (n_unique) observations.  
 
 For the numeric class, `skim` provides mean, standard deviation (sd), and percentile breaks (p0, p25,...,p100).  It also provides a small histogram to help visualize the distribution of your numeric data (hist).
 
-This likely does not satisfy the user's desire to understand the data as we still do not understand which countries are in the data among other curiosities.  We will provide more indepth methods of understanding your data in the Exploratory Data Analysis (EDA) section after we look briefly at the 6 `dplyr` verbs that allow students to begin rapidly interrogating data.   
+This likely does not satisfy the students's desire to understand the data as we still do not understand which countries are in the data among other curiosities.  We will provide more indepth methods of understanding the data in the plotting and Exploratory Data Analysis (EDA) section after we look briefly at the 6 `dplyr` verbs that allow students to begin rapidly understanding the data.   
 
 ### `dplyr` Verbs
 
-Almost any time a user is working with data, they will need to manipulate that data in some way.  In this next section, we will introduce the main 6 `dplyr` verbs to help wrangle data to gain additional insight.  These verbs, `select`, `filter`, `mutate`, `group_by`, `summarize`, `arrange` are explained in detail below.  
+Almost any time a student wors with data, they will need to manipulate that data in some way.  In this next section, we will introduce the main 6 `dplyr` verbs to help wrangle data to gain additional insight.  These verbs, `select`, `filter`, `mutate`, `group_by`, `summarize`, `arrange` are explained in detail below.  
 
-In order to motivate use of the aformentioned verbs, we'll look to answer the following question: What is the average GDP per country since 1980?
+In order to motivate a student's use of the aformentioned verbs, we'll look to answer the following question: 
+
+<!-- for PDF output -->
+<!-- \begin{center} -->
+<!-- \textbf{What is the average GDP per country since 1980?} -->
+<!-- \end{center} -->
+
+<!-- for html output -->
+<center>
+**What is the average GDP per country since 1980?**
+</center>
 
 #### Verb 1: `select`
 
@@ -198,7 +229,6 @@ To begin, we only need to work with certain columns.  The relevent columns to th
 
 ```{r}
 gapminder_selected = select(gapminder, country, year, pop, gdpPercap)
-
 gapminder_selected
 ```
 
@@ -206,11 +236,10 @@ Once we view the data, we see that we now have 1704 rows with 4 columns.
 
 #### Verb 2: `filter`
 
-To further answer our question, we need to filter our data down to the years of interest.  We can achieve this goal using the `filter` function.  Like the `select` function, the first argument in the `filter` function is the data and subsequent argument is the logical statement of which you wish to filter the data.  In the code below, we filter our selected data and save our filtered data into a new tibble called `gapminder_filtered`.
+To further answer our question, we need to filter our data down to the years of interest.  We can achieve this goal using the `filter` function.  Like the `select` function, the first argument in the `filter` function is the data and subsequent argument is the logical statement of which you wish to filter.  In the code below, we filter our selected data and save our filtered data into a new tibble called `gapminder_filtered`.
 
 ```{r}
 gapminder_filtered = filter(gapminder_selected, year >= 1980)
-
 gapminder_filtered
 ```
 
@@ -218,11 +247,10 @@ Once we view the data, we see that our data now consist of years since 1980.
 
 #### Verb 3: `mutate`
 
-The next step in answering our question is creating a column that contains the information of interest.  The `mutate` function creats new columns according to a specific function that we provide.  To answer our question, we need to determine the GDP in each year.  To find the GDP, we need to multiply the `gdpPercap` by the `pop`.  Similar to the previou two verbs, the first argument in the `mutate` function is the data.  Subsequent arguments are columns you wish to create with corresponding formulas.  In the code below, we mutate our filtered data and save our mutated data into a new tibble called `gapminder_mutated`.
+The next step in answering our question is creating a column that contains the information of interest.  The `mutate` function creats new columns according to a specific function that we provide.  To answer our question, we need to determine the GDP in each year.  To find the GDP, we need to multiply the `gdpPercap` by the `pop`.  Similar to the previous two verbs, the first argument in the `mutate` function is the data.  Subsequent arguments are columns you wish to create with corresponding formulas.  In the code below, we mutate our filtered data and save our mutated data into a new tibble called `gapminder_mutated`.
 
 ```{r}
 gapminder_mutated = mutate(gapminder_filtered, GDP = gdpPercap * pop)
-
 gapminder_mutated
 ```
 
@@ -230,23 +258,21 @@ Once we view the data, we see the new column, GDP, has been added to the end of 
 
 #### Verb 4: `group_by`
 
-The next step in answering our question will be to group our data by the topic of interest.  In this instance, since we want to know GDP by country, we need to group or data by country.  A way to conceptualize this step is to think of placing each group of data into a specific room.  In subsequent steps we will apply a function to each group of data.  Just like the previous verbs, the first argument in the `group_by` function is the data.  The following arguments are the columns you wish to group by.  In the code below, we group our mutated data and save our grouped data into a new tibble called `gapminder_grouped`.
+The next step in answering our question will be to group our data by the topic of interest.  In this instance, since we want to know GDP by country, we need to group or data by country.  A way to conceptualize this step is to think of placing each group of data into a specific room.  In subsequent steps we will apply a function to each group (or room) of data.  Just like the previous verbs, the first argument in the `group_by` function is the data.  The following arguments are the columns you wish to group by.  In the code below, we group our mutated data and save our grouped data into a new tibble called `gapminder_grouped`.
 
 ```{r}
 gapminder_grouped =  group_by(gapminder_mutated, country) 
-
 gapminder_grouped
 ```
 
-The reader will notice that there apears to be no change to the data.  This is mostly true as we have simply told R that we would like to apply future functions over each group of data instead of over the entire tibble.  The only difference in output is the a note explaining the what the data has been grouped into and the number of groups.  In this case, it explains the data is grouped by `continent` and that there are 5 groups.  
+The reader will notice that there apears to be no change to the data.  This is mostly true as we have simply told R that we would like to apply future functions over each group of data instead of over the entire tibble.  The only difference in output is the a note explaining the what the data has been grouped into and the number of groups.  In this case, it explains the data is grouped by `country` and that there are 142 groups.  
 
 #### Verb 5: `summarise`
 
-Next in order to determine the average GDP by country, we need to apply a function to each group we have identified.  In this instance, we will need to take the average GDP over each continent.  Since we've already grouped by country, we simply need to apply the summarise function.  Like the previous verbs, the first argument in the `summarise` function is the data.  The following arguments are the function you would like to apply to each group.  In the code below, we summarise our grouped data and save our summarised data into a new tibble called `gapminder_summarised`.
+Next, in order to determine the average GDP by country, we need to apply a function to each group we have identified.  In this instance, we will need to take the average GDP over each continent.  Since we've already grouped by country, we simply need to apply the summarise function.  Like the previous verbs, the first argument in the `summarise` function is the data.  The following arguments are the function you would like to apply to each group.  In the code below, we summarise our grouped data and save our summarised data into a new tibble called `gapminder_summarised`.
 
 ```{r}
 gapminder_summarised = summarise(gapminder_grouped, AVG_GDP = mean(GDP))
-
 gapminder_summarised
 ```
 
@@ -254,11 +280,10 @@ We now have an answer to our question.  The tibble above shows the average GDP p
 
 #### Verb 6: `arrange`
 
-However, we can refine our data to provide more inisght.  Currently, our data is sorted alphabetically by country.  This does not provide much insight.  We can use the `arrange` function to sort the data by average GDP; both assending and descending.  Like all other verbs, the first argument in the `arrange` function is the data.  The following argument is the column you wish to sort by.  In the code below, we arrange our summarised data and save our arranged data into a new tibble called `gapminder_arranged`.
+However, we can refine our data to provide more understanding.  Currently, our data is sorted alphabetically by country.  This does not provide much insight.  We can use the `arrange` function to sort the data by average GDP; both assending and descending.  Like all other verbs, the first argument in the `arrange` function is the data.  The following argument is the column you wish to sort by.  In the code below, we arrange our summarised data and save our arranged data into a new tibble called `gapminder_arranged`.
 
 ```{r}
 gapminder_arragned = arrange(gapminder_summarised, AVG_GDP)
-
 gapminder_arragned
 ```
 
@@ -268,9 +293,10 @@ It may be more interesting, however, to sort the average GDP in descending order
 
 ```{r}
 gapminder_arragned_descending = arrange(gapminder_summarised, -AVG_GDP)
-
 gapminder_arragned_descending
 ```
+
+#### Simplifying Code with the Pipe Operator: `%>%` 
 
 After helping learners see how each function works we can introduce the pipe operator (`%>%`) that can be used to chain together commands and pass the results of one functiopn directly into the next function. This can result in very logical data manipulation steps that are easy to learn and easy to understand:
 
@@ -287,9 +313,13 @@ gapminder_arragned_descending_chained =
 gapminder_arragned_descending_chained
 ```
 
-From the preceeding example, you can see how to gain insight from data by manipulating the tibble with `dplyr` verbs.  A more helpful way to gain insight from data is by viewing it graphically.  We'll go over plotting basics 
+<!-- Does the next paragraph help the explaination or is it just more verbose blabbing... -->
+
+Some students may struggle to grasp this coding technique.  It may be helpful to explain the pipe in the following way:  A pipe takes the result of the previous fuction and 'pipes' it into the first argument of the next function.  In that way, we can chain together our verbs to manipulate and gain insight on the data.
 
 ### Plotting/EDA
+
+From the preceeding example, you can see how to gain insight from data by manipulating the tibble with `dplyr` verbs. A more helpful way to gain insight from data is by viewing it graphically.  We'll go over plotting basics 
 
 Typically before building any models or doing other analysis, students benefit from learning to do basic exploritory data analysis (EDA). One tool for getting students a quick win with learning data visualization is to use `ggplot2` with the helper package `esquisse` to give them a graphical user interface that helps them write `ggplot2` code. 
 
@@ -310,38 +340,219 @@ The strength of `esquisse` is that it produces the `ggplot2` code that allows th
 
 ### Regression 
 
-While there are many statistical applications in Econometrics, we'll highlight Simple Linear Regression which is just one of many tools in R's arsonel.  
+One of the more common statistical tools students learn in Econometrics is Linear Regression.  It happens to be one of many tools in R's arsonel.
 
-Using the `parsnip` package from the `tidymodels` family of packages, we can easily create a linear model and extract the regression coefficience and P Values.  
+In the base stats package and with one additional library, R offers easy to execute and simple to understand tools to execute everything we would expect a student to learn in linear regression.  
 
-In the example below, we do the following:
+To highlight these tool, lets explore the linear relationship between several variables and life expectancy (`lifeExp`) in the Gapminder data.
 
-1) Specify the model type:  In this instance, we specify linear regression with the `linear_reg()` fuction
-2) Specify the engine:  In the `set_engine` function we specify the computational engine.  In this instance, we are using base R's linear regression function.  
-3) Specify the 'fit' of the model:  In this case, we regress `lifeExp` on `gdpPercap`.
+#### Simple Linear Regression
 
-Lastly, we request the the summary of the model using the `tidy` command.  We see the traditional output with the regression coeficients, standard error, test statistic, and P Values.
+To execute linear regression, we need to specify two arguments in the `lm` function: The formula and the data.  As you can see in the example below, our formula is in the format `y~x` - pronounced y by x.  As expected, the `data` is equal to `gapminder`.
 
-Install the `parsnip` and `broom` packages, if not already installed:
-```{r, include=TRUE, eval=FALSE}
-install.packages("parsnip")
-install.packages("broom")
+```{r}
+model1 = lm(formula = lifeExp~gdpPercap,data = gapminder)
 ```
 
-```{r, include=TRUE, eval=TRUE}
-library(parsnip)
-library(broom)
+R executes this command and saves it as `model1`.  To retrieve our simple linear regression model, we place `model1` in the summary command below.
 
-linear_reg() %>%
-  set_engine("lm") %>%
-  fit(lifeExp ~ gdpPercap, data = gapminder) %>%
-  tidy() 
+```{r}
+summary(model1)
+```
+
+As you can see from the output, the student sees pertinent information about the model to include the equation, a small summary of the residuals, regression coefficients, P Values, and familiar model evaluation statistics such as $R^2$ and Adjusted $R^2$.  
+
+Adjusting the linear model is simple.  Should we desire to add another factor to the model, we can do it simply by adding it to the formula like the example below.
+
+```{r}
+model2 = lm(formula = lifeExp~gdpPercap+year,data = gapminder)
+summary(model2)
+```
+
+Lastly, R's linear model function is flexible enought to easily add interaction terms.  Teaching using this syntax is a simple and easy to demonstrate.
+
+```{r}
+model3 = lm(formula = lifeExp~gdpPercap*year,data = gapminder)
+summary(model3)
+```
+
+#### Linear Regression Modeling Assumptions
+
+One of the staples of teaching linear regression is helping students determine if their model meets the four assumptions necessary for a linear model to be valid:
+
+1) Independent Observations
+2) Normal Errors
+3) Consistant Variance
+4) Linear Relationships
+
+Independent Observations: 
+
+To determine independence, we must know how the data was collected.  There are likely independence issues as the data on each country in the Gapminder collection are likely influenced by each other.  We'll acknowledge this and proceed on with the analysis.  
+
+Other Assumptions:
+
+To verify the other assumptions, we need to create two plots.  The residual plots and a qqplot.
+
+To create the residual plots, we'll explore model 2.  We need to create three plots.  The y axes for each plot will be the residuals (the observed life expectancy - the life expectancy predicted by our model).  The x axis for our three plots will be GDP Per Capita, year, and our predicted values.  
+
+We will need to crete the residuals to execute these plots.  We can do this as the code below specifies.
+
+```{r}
+predictions = predict.lm(object = model2, newdata = gapminder)
+```
+
+We can easily add these predictions to our tibble for plotting with the tools we've previously learned.  Furthermore, we can calculate the redisuals in the next step.
+
+```{r}
+gapminder_predicted = gapminder %>%
+  mutate(Fitted = predictions) %>%
+  mutate(residual = lifeExp-predictions)
+head(gapminder_predicted)
+```
+
+Now we can use `ggplot` to create the three residual plots.
+
+```{r}
+gapminder_predicted %>%
+  ggplot(aes(x=gdpPercap,y=residual)) +
+  geom_point() +
+  geom_hline(aes(yintercept = 0, color = "red"), linetype = "dotdash", size = 1) +
+  labs(x= "GDP Per Capita", y = "Residual", title = "Residual Plot (GDP Per Capita vs Residual)") + 
+  theme(legend.position = "none")
+gapminder_predicted %>%
+  ggplot(aes(x=year,y=residual)) +
+  geom_point() +
+  geom_hline(aes(yintercept = 0, color = "red"), linetype = "dotdash", size = 1) +
+  labs(x= "Year", y = "Residual", title = "Residual Plot (GDP Per Capita vs Year)") + 
+  theme(legend.position = "none")
+gapminder_predicted %>%
+  ggplot(aes(x=Fitted,y=residual)) +
+  geom_point() +
+  geom_hline(aes(yintercept = 0, color = "red"), linetype = "dotdash", size = 1) +
+  labs(x= "Fitted Values", y = "Residual", title = "Residual Plot (Fitted Values vs Residual)") + 
+  theme(legend.position = "none")
+```
+
+<!-- I could also do this and explain it, but is this too much? -->
+
+```{r}
+gapminder_predicted %>%
+  mutate(Predictions = Fitted) %>%
+  # mutate(year = as.factor(year)) %>%
+  gather(XAxis, Value, year, gdpPercap, Fitted) %>%
+  ggplot(aes(x=Value, y=residual)) +
+  geom_point() +
+  facet_wrap(~forcats::fct_relevel(XAxis, "gdpPercap","year","Fitted"), scales = "free_x") +
+  geom_hline(aes(yintercept = 0, color = "red"), linetype = "dotdash", size = 1) +
+  labs(x="X Values", "Residuals", "Residual Plots") +
+  theme(legend.position = "none")
+```
+
+The second plot we need to look at is the qqplot.
+
+```{r}
+gapminder_predicted %>%
+  ggplot(aes(sample = residual)) +
+  stat_qq() +
+  stat_qq_line()
 ```
 
 
+We can see from the residual plots, that our model stands up well to consistant variance, however, linearity and normality of errors are suspect.  Lets apply a simple transformation to our model and see if it improves our residuals.
 
-so we need more here.... obviously 
 
+```{r}
+modeladj = lm(formula = lifeExp~log(gdpPercap)+year,data = gapminder)
+summary(modeladj)
+```
+
+We'll now re-run the same code as before and look at the change to our residuals to see how our change impacts our assumptions.
+
+```{r}
+predictions = predict.lm(object = modeladj, newdata = gapminder)
+
+gapminder_predicted = gapminder %>%
+  mutate(Fitted = predictions) %>%
+  mutate(residual = lifeExp-predictions)
+
+gapminder_predicted %>%
+  ggplot(aes(x=gdpPercap,y=residual)) +
+  geom_point() +
+  geom_hline(aes(yintercept = 0, color = "red"), linetype = "dotdash", size = 1) +
+  labs(x= "GDP Per Capita", y = "Residual", title = "Residual Plot (GDP Per Capita vs Residual)") + 
+  theme(legend.position = "none")
+gapminder_predicted %>%
+  ggplot(aes(x=year,y=residual)) +
+  geom_point() +
+  geom_hline(aes(yintercept = 0, color = "red"), linetype = "dotdash", size = 1) +
+  labs(x= "Year", y = "Residual", title = "Residual Plot (GDP Per Capita vs Year)") + 
+  theme(legend.position = "none")
+gapminder_predicted %>%
+  ggplot(aes(x=Fitted,y=residual)) +
+  geom_point() +
+  geom_hline(aes(yintercept = 0, color = "red"), linetype = "dotdash", size = 1) +
+  labs(x= "Fitted Values", y = "Residual", title = "Residual Plot (Fitted Values vs Residual)") + 
+  theme(legend.position = "none")
+gapminder_predicted %>%
+  ggplot(aes(sample = residual)) +
+  stat_qq() +
+  stat_qq_line()
+```
+
+It appears that the consistancy of variance assumption is satisfied, however, the normality of errors is still a little suspect.
+
+### Conclusion
+
+R is awesome! You should teach with it for several reasons:
+
+Free, easily accessable (unless you are on a government network), reproducable, relativly easy...
+
+
+
+### Overarching questions:
+
+1) Does the introduction do what we want it to do?
+2) Does the tutorial piece speak correctly?  Meaning, should it be more like, "we find students benefit from this:" vs what it is currently: "Here, let me teach you the following"
+3) Should we mention how to actually execute a line of code or are we assuming that?
+
+
+<!-- Left for future deletion -->
+
+<!-- One of the more common statistical tools students learn in Econometrics is Simple Linear Regression.  It happens to be one of many tools in R's arsonel.   -->
+
+<!-- Using the `parsnip` package from the `tidymodels` family of packages, we can easily create a linear model and extract the regression coefficience and P Values.   -->
+
+<!-- To begin, install the `parsnip` and `broom` packages, if not already installed: -->
+
+<!-- ```{r, include=TRUE, eval=FALSE} -->
+<!-- install.packages("parsnip") -->
+<!-- install.packages("broom") -->
+<!-- ``` -->
+
+<!-- In the example below, students can easily learn to do the following: -->
+
+<!-- 1) Specify the model type:  In this instance, we specify linear regression with the `linear_reg()` fuction. -->
+<!-- 2) Specify the engine:  In the `set_engine` function we specify the computational engine.  In this instance, we are using the linear regression function from R's base stats package.   -->
+<!-- 3) Specify the 'fit' of the model:  In this case, we regress `lifeExp` on `gdpPercap`. -->
+<!-- 4) Request the the summary of the model using the `tidy` command.   -->
+
+<!-- Note, we add the `kable` functions to improve the layout style of the output.  -->
+
+<!-- ```{r, include=TRUE, eval=TRUE} -->
+<!-- library(parsnip) -->
+<!-- library(broom) -->
+
+<!-- linear_reg() %>% -->
+<!--   set_engine("lm") %>% -->
+<!--   fit(lifeExp ~ gdpPercap, data = gapminder) %>% -->
+<!--   tidy() %>% -->
+<!--   kableExtra::kable() %>% -->
+<!--   kableExtra::kable_styling(full_width = F) -->
+<!-- ``` -->
+
+<!-- For more information about `parship` see the project web site: https://tidymodels.github.io/parsnip/ -->
+
+<!-- so we need more here.... obviously  -->
 
 
 
