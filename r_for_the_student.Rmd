@@ -115,19 +115,6 @@ The packages listed below are in the "Core Tidyverse" and get loaded with `libra
 
 There are 11 additional Tidyverse packages that get installed, but not automatically loaded. These add specialized functions for more specialized uses.
 
-<!-- which do you like better?  This? -->
-
-Date and time manipulation:  
-`hms` & `lubridate`
-
-Model building and output manipulation:  
-`modelr` & `broom`
-
-Data inport:  
-`feather`, `haven`, `httr`, `jsonlite`, `readxl`, `rvest`, and `ml2`
-
-<!-- or this? -->
-
 `hms`: time manipulation
 `lubridate`: date manipulation  
 `modelr`: model building  
@@ -138,9 +125,7 @@ Data inport:
 `jsonlite`: JSON manipulation
 `readxl`: reading Excel files
 `rvest`: scrape html data
-`ml2`: Data inport  
-<!-- idk what ml2 is.... -->
-
+`xml2`: Data inport  
 
 More info on each can be found at https://tidyverse.tidyverse.org
 
