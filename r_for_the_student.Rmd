@@ -177,9 +177,9 @@ install.packages("skimr")
 
 <!-- What is your hack to make the histograms print out correctly? -->
 
-```{r, warning=FALSE, message=FALSE}
+```{r, warning=FALSE, message=FALSE, results='asis'}
 library(skimr)
-skim(gapminder)
+kable(skim(gapminder))
 ```
 
 This gives students a much better view of the data.  `skim` seperates the data by class and provides important information for each data type.  We find that the `skim` function gives students the quickest and best description of the data.  Other options of presenting detailed information about the data include the `summary(gapminder)`, `glimse(gapminder)`, and `str(gapminder)`
