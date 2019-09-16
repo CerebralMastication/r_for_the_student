@@ -351,7 +351,7 @@ To highlight these tool, lets explore the linear relationship between several va
 To execute linear regression, we need to specify two arguments in the `lm` function: The formula and the data.  As you can see in the example below, our formula is in the format `y~x` - pronounced y by x.  As expected, the `data` is equal to `gapminder`.
 
 ```{r}
-model1 = lm(formula = lifeExp~gdpPercap,data = gapminder)
+model1 = lm(formula = lifeExp ~ gdpPercap, data = gapminder)
 ```
 
 R executes this command and saves it as `model1`.  To retrieve our simple linear regression model, we place `model1` in the summary command below.
@@ -365,14 +365,14 @@ As you can see from the output, the student sees pertinent information about the
 Adjusting the linear model is simple.  Should we desire to add another factor to the model, we can do it simply by adding it to the formula like the example below.
 
 ```{r}
-model2 = lm(formula = lifeExp~gdpPercap+year,data = gapminder)
+model2 = lm(formula = lifeExp ~ gdpPercap + year, data = gapminder)
 summary(model2)
 ```
 
 Lastly, R's linear model function is flexible enought to easily add interaction terms.  Teaching using this syntax is a simple and easy to demonstrate.
 
 ```{r}
-model3 = lm(formula = lifeExp~gdpPercap*year,data = gapminder)
+model3 = lm(formula = lifeExp ~ gdpPercap * year, data = gapminder)
 summary(model3)
 ```
 
@@ -406,7 +406,7 @@ We can easily add these predictions to our tibble for plotting with the tools we
 ```{r}
 gapminder_predicted = gapminder %>%
   mutate(Fitted = predictions) %>%
-  mutate(residual = lifeExp-predictions)
+  mutate(residual = lifeExp - predictions)
 head(gapminder_predicted)
 ```
 
@@ -414,22 +414,28 @@ Now we can use `ggplot` to create the three residual plots.
 
 ```{r}
 gapminder_predicted %>%
-  ggplot(aes(x=gdpPercap,y=residual)) +
+  ggplot(aes(x = gdpPercap, y = residual)) +
   geom_point() +
-  geom_hline(aes(yintercept = 0, color = "red"), linetype = "dotdash", size = 1) +
-  labs(x= "GDP Per Capita", y = "Residual", title = "Residual Plot (GDP Per Capita vs Residual)") + 
+  geom_hline(aes(yintercept = 0, color = "red"),
+             linetype = "dotdash",
+             size = 1) +
+  labs(x = "GDP Per Capita", y = "Residual", title = "Residual Plot (GDP Per Capita vs Residual)") +
   theme(legend.position = "none")
 gapminder_predicted %>%
-  ggplot(aes(x=year,y=residual)) +
+  ggplot(aes(x = year, y = residual)) +
   geom_point() +
-  geom_hline(aes(yintercept = 0, color = "red"), linetype = "dotdash", size = 1) +
-  labs(x= "Year", y = "Residual", title = "Residual Plot (GDP Per Capita vs Year)") + 
+  geom_hline(aes(yintercept = 0, color = "red"),
+             linetype = "dotdash",
+             size = 1) +
+  labs(x = "Year", y = "Residual", title = "Residual Plot (GDP Per Capita vs Year)") +
   theme(legend.position = "none")
 gapminder_predicted %>%
-  ggplot(aes(x=Fitted,y=residual)) +
+  ggplot(aes(x = Fitted, y = residual)) +
   geom_point() +
-  geom_hline(aes(yintercept = 0, color = "red"), linetype = "dotdash", size = 1) +
-  labs(x= "Fitted Values", y = "Residual", title = "Residual Plot (Fitted Values vs Residual)") + 
+  geom_hline(aes(yintercept = 0, color = "red"),
+             linetype = "dotdash",
+             size = 1) +
+  labs(x = "Fitted Values", y = "Residual", title = "Residual Plot (Fitted Values vs Residual)") +
   theme(legend.position = "none")
 ```
 
@@ -440,11 +446,14 @@ gapminder_predicted %>%
   mutate(Predictions = Fitted) %>%
   # mutate(year = as.factor(year)) %>%
   gather(XAxis, Value, year, gdpPercap, Fitted) %>%
-  ggplot(aes(x=Value, y=residual)) +
+  ggplot(aes(x = Value, y = residual)) +
   geom_point() +
-  facet_wrap(~forcats::fct_relevel(XAxis, "gdpPercap","year","Fitted"), scales = "free_x") +
-  geom_hline(aes(yintercept = 0, color = "red"), linetype = "dotdash", size = 1) +
-  labs(x="X Values", "Residuals", "Residual Plots") +
+  facet_wrap(~ forcats::fct_relevel(XAxis, "gdpPercap", "year", "Fitted"),
+             scales = "free_x") +
+  geom_hline(aes(yintercept = 0, color = "red"),
+             linetype = "dotdash",
+             size = 1) +
+  labs(x = "X Values", "Residuals", "Residual Plots") +
   theme(legend.position = "none")
 ```
 
@@ -462,7 +471,7 @@ We can see from the residual plots, that our model stands up well to consistant 
 
 
 ```{r}
-modeladj = lm(formula = lifeExp~log(gdpPercap)+year,data = gapminder)
+modeladj = lm(formula = lifeExp ~ log(gdpPercap) + year, data = gapminder)
 summary(modeladj)
 ```
 
@@ -473,25 +482,31 @@ predictions = predict.lm(object = modeladj, newdata = gapminder)
 
 gapminder_predicted = gapminder %>%
   mutate(Fitted = predictions) %>%
-  mutate(residual = lifeExp-predictions)
+  mutate(residual = lifeExp - predictions)
 
 gapminder_predicted %>%
-  ggplot(aes(x=gdpPercap,y=residual)) +
+  ggplot(aes(x = gdpPercap, y = residual)) +
   geom_point() +
-  geom_hline(aes(yintercept = 0, color = "red"), linetype = "dotdash", size = 1) +
-  labs(x= "GDP Per Capita", y = "Residual", title = "Residual Plot (GDP Per Capita vs Residual)") + 
+  geom_hline(aes(yintercept = 0, color = "red"),
+             linetype = "dotdash",
+             size = 1) +
+  labs(x = "GDP Per Capita", y = "Residual", title = "Residual Plot (GDP Per Capita vs Residual)") +
   theme(legend.position = "none")
 gapminder_predicted %>%
-  ggplot(aes(x=year,y=residual)) +
+  ggplot(aes(x = year, y = residual)) +
   geom_point() +
-  geom_hline(aes(yintercept = 0, color = "red"), linetype = "dotdash", size = 1) +
-  labs(x= "Year", y = "Residual", title = "Residual Plot (GDP Per Capita vs Year)") + 
+  geom_hline(aes(yintercept = 0, color = "red"),
+             linetype = "dotdash",
+             size = 1) +
+  labs(x = "Year", y = "Residual", title = "Residual Plot (GDP Per Capita vs Year)") +
   theme(legend.position = "none")
 gapminder_predicted %>%
-  ggplot(aes(x=Fitted,y=residual)) +
+  ggplot(aes(x = Fitted, y = residual)) +
   geom_point() +
-  geom_hline(aes(yintercept = 0, color = "red"), linetype = "dotdash", size = 1) +
-  labs(x= "Fitted Values", y = "Residual", title = "Residual Plot (Fitted Values vs Residual)") + 
+  geom_hline(aes(yintercept = 0, color = "red"),
+             linetype = "dotdash",
+             size = 1) +
+  labs(x = "Fitted Values", y = "Residual", title = "Residual Plot (Fitted Values vs Residual)") +
   theme(legend.position = "none")
 gapminder_predicted %>%
   ggplot(aes(sample = residual)) +
