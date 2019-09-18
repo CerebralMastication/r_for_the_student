@@ -47,11 +47,11 @@ The advantages to using R whether in an academic setting or industry are myriad.
 
 ### CRAN 
 
-The online home of R is the Comprehensive R Archive Network, CRAN. CRAN is where a new user can download R and access packages that expand the functionality of R. There are currently more than 10,000 R packages hosted on CRAN for free download. Some new users to R are overwhelmed by the sheer volume of packages. To help make sense of the CRAN ecosystem, CRAN has published CRAN Task Views which organize popular packages into categories of use (e.g. econometrics or spatial statistics). The task views are written and maintained by a subject matter expert. There are more than 35 such task views which can help new R users make sense of the packages availiable in their areas of interest and know which packages are recommended by an expert in their domain of interest. This can give instructors and students a curated view into packages that might match their interests or field of study: https://cran.r-project.org/web/views/
+The online home of R is the Comprehensive R Archive Network, CRAN. CRAN is where a new user can download R and access packages that expand the functionality of R. There are currently more than 10,000 R packages hosted on CRAN for free download [@cran]. Some new users to R are overwhelmed by the sheer volume of packages. To help make sense of the CRAN ecosystem, CRAN has published CRAN Task Views which organize popular packages into categories of use (e.g. econometrics or spatial statistics). The task views are written and maintained by a subject matter expert. There are more than 35 such task views which can help new R users make sense of the packages availiable in their areas of interest and know which packages are recommended by an expert in their domain of interest. This can give instructors and students a curated view into packages that might match their interests or field of study: https://cran.r-project.org/web/views/
 
 ### RStudio
 
-When R is downloaded from CRAN, it comes with an engine for executing R code along with a few core packages for doing statistical analysis and graphics. Collectivly these tools are refered to as "Base R". Base R comes with a basic text editor for editing and executing R scprits. However most users quickly discover that writing R code is easier wiht an integrated developemnt environment (IDE). The most popular IDE for R is RStudio whcih we highly recommend for teaching.
+When R is downloaded from CRAN, it comes with an engine for executing R code along with a few core packages for doing statistical analysis and graphics. Collectivly these tools are refered to as "Base R". Base R comes with a basic text editor for editing and executing R scprits. However most users quickly discover that writing R code is easier with an integrated developemnt environment (IDE). The most popular IDE for R is RStudio which we highly recommend for teaching.
 
 RStudio desktop can be downloaded for free from RStudio.com. In additon to the desktop IDE, RStudio makes a server based IDE for using R on remote machines. RStudio server also is availiable in a professional version that offers more features such as authentication and collaborative editing. RStudio offers its professional tools to academics for free. Go to https://www.rstudio.com/pricing/academic-pricing/ for more info. 
 
@@ -61,7 +61,7 @@ For many instructors, the freely availiable RStudio.cloud service (http://rstudi
 knitr::include_graphics("03_figures/rstudio.cloud.png")
 ```
 
-Instructors who don't want to use the cloud solutions, or can't because of connectivity restrictions, can download and install R and RStudio on local hardware. For details on downloading and installing, see section 1.1 in R Cookbook Second Edition, available online at https://rc2e.com/gettingstarted#recipe-id001.
+Instructors who do not want to use the cloud solutions, or can't because of connectivity restrictions, can download and install R and RStudio on local hardware. For details on downloading and installing, see section 1.1 in R Cookbook Second Edition, available online at https://rc2e.com/gettingstarted#recipe-id001.
 
 ### Projects
 
@@ -77,7 +77,7 @@ We've found that helping students organieze their files using projects from the 
 
 ### Tidyverse
 
-In addition to the RStudio IDE, the RStudio company supports the development of a number of open source packages designed to work together to make R easier to use and faster to learn. These libraries are collectivly known as the "Tidyverse". The most concise definition of the Tidyverse comes directly from its originator and core maintainer,  Wickham:
+In addition to the RStudio IDE, the RStudio company supports the development of a number of open source packages designed to work together to make R easier to use and faster to learn. These libraries are collectivly known as the "Tidyverse". The most concise definition of the Tidyverse comes directly from its originator and core maintainer,  Wickham[@rstudioblog]:
 
 > The tidyverse is a set of packages that work in harmony because they share 
 > common data representations and API design. The tidyverse package is designed 
@@ -85,7 +85,6 @@ In addition to the RStudio IDE, the RStudio company supports the development of 
 > single command. The best place to learn about all the packages in the 
 > tidyverse and how they fit together is *[R for Data Science](http://r4ds.had.co.nz)*.
 
-(https://blog.rstudio.com/2016/09/15/tidyverse-1-0-0/)
 
 The authors have had very good experiences with introducing learners to the Tidyverse from the very beginning of the learning journey because these tools help learners see very quick successes which, in turn, keeps them engaged in the learning process. The popular plotting package `ggplot2` and the data manipulation package `dplyr` are both core Tidyverse packages. 
 
@@ -96,7 +95,7 @@ install.packages("tidyverse")
 ```
 
 #### Tidyverse Packages
-When a user installs the Tidyverse, 19 packages are installed. Then when the user loads the tidyverse using `library(tidyverse)` a core subset of 8 packages are loaded into R. To use any of the pacakges not loaded with the core Tidyverse a user must explicitly load those packages (e.g. `library(readxl)`) or call the packages using the package name prefix (e.g. `readxl::read_xlsx()` to run the `read_xlsx()` function from the `readxl` package).
+When a user installs the Tidyverse, 19 packages are installed [@dustysreference;@jdsreference]. Then when the user loads the tidyverse using `library(tidyverse)` a core subset of 8 packages are loaded into R. To use any of the pacakges not loaded with the core Tidyverse a user must explicitly load those packages (e.g. `library(readxl)`) or call the packages using the package name prefix (e.g. `readxl::read_xlsx()` to run the `read_xlsx()` function from the `readxl` package).
 
 The packages listed below are in the "Core Tidyverse" and get loaded with `library(tidyverse)`. 
 
@@ -113,19 +112,39 @@ The packages listed below are in the "Core Tidyverse" and get loaded with `libra
 
 ***Additional Tidyverse***
 
-There are 11 additional Tidyverse packages that get installed, but not automatically loaded. These add specialized functions for more specialized uses.
+There are 11 additional Tidyverse packages that get installed, but not automatically loaded. These add specialized functions for more specialized uses. [@dustysreference;@jdsreference]
 
-`hms`: time manipulation
-`lubridate`: date manipulation  
-`modelr`: model building  
-`broom`: output manipulation  
-`feather`: reading / writing data
-`haven`: reading / writing data
-`httr`: accessing html
-`jsonlite`: JSON manipulation
+*Import*
+
 `readxl`: reading Excel files
-`rvest`: scrape html data
-`xml2`: Data inport  
+`haven`: reading SPSS, Stata, and SAS data
+`jsonlite`: manipulating JSON 
+`xml2`: reading xml  
+`httr`: accessing web APIs
+`rvest`: for web scraping
+
+*Wrangle*
+
+`lubridate`: date manipulation  
+`hms`: time-of-day manipulation
+`blob`: for storing binary data
+
+*Program*
+
+`magrittr`: provides the pipe operator
+`glue`: provides an alternative to paste
+
+<!-- `modelr`: model building   -->
+<!-- `broom`: output manipulation   -->
+<!-- `feather`: reading / writing data -->
+
+<!-- I looked at this webpage and updated this previous information.  It seems a little different that what you origionally had.  Was my website newer (or older).  I just want to make sure I have the accurate stuff. -->
+<!-- https://www.tidyverse.org/packages/ -->
+
+<!-- Then i looked at this website (where I think you got your information).  My link above refrences yours.  I'm so confused.  I can change it back if you think this is more updated. -->
+<!-- https://www.tidyverse.org/packages/ -->
+
+<!-- There were 19 in each one.... -->
 
 More info on each can be found at https://tidyverse.tidyverse.org
 
@@ -135,7 +154,7 @@ In the following sections, we will highlight some of the features of R and the `
 
 ### Loading Data (Gapminder)
 
-To aide our instructions, we will explore the Gapminder data set.  The Gapminder dataset is created by the Gapminder Foundation which is a non-profit which promots sustainable global development.  https://www.gapminder.org
+To aide our instructions, we will explore the Gapminder data set.  The Gapminder dataset is created by the Gapminder Foundation which is a non-profit which promots sustainable global development[@gapminder].
 
 Showing students how to load in example data is a crucial first step. Data can be easily loaded from the local file system:
 
@@ -167,11 +186,11 @@ Simply outputting the code can tell students a bundle of information about the d
 gapminder
 ```
 
-From the output above, one can see the `gapminder` dataset is a `tibble` consisting of 1,704 observational units with 6 columns of information. When reading in data, the `read_csv` command identifies the most likely class of data for each column lists the class below the column name.  We can see that we have a mix of `character`s and `double`s. A `tibble` is a Tidyverse take on R's traditional `data.frame`. We've found that it usually is sufficient to tell students that `tibble` is a table. Since the goal is to get students using data to *do* things we often don't spend excessive time on definitions and instead focus on getting students doing something interesting. 
+From the output above, one can see the `gapminder` dataset is a `tibble` consisting of 1,704 observational units with 6 columns of information. When reading in data, the `read_csv` command identifies the most likely class of data for each column lists the class below the column name.  We can see that we have a mix of `character`s and `double`s. A `tibble` is a Tidyverse take on R's traditional `data.frame`. We've found that it usually is sufficient to tell students that `tibble` is a table. Since the goal is to get students using data to *do* things we often do not spend excessive time on definitions and instead focus on getting students doing something interesting. 
 
 Students also notice that printing out the data does not provude all the information they would like to know.  One can see that the data has information about countries, but are they all Afghanistan?  Likely no, as you can see there are 1,694 more rows and they probably are not all Afghanistan.  Lets look at other ways to understand the data. 
 
-We recommend using the `skim` command from the `skimr` library.  You may need to download the `skimr` package from CRAN.
+We recommend using the `skim` command from the `skimr` library[@skimr].  You may need to download the `skimr` package from CRAN.
 
 ```{r installskimr, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 install.packages("skimr")
@@ -310,7 +329,7 @@ From the preceeding example, you can see how to gain insight from data by manipu
 
 #### `esquisse`
 
-Typically before building any models or doing other analysis, students benefit from learning to do basic exploritory data analysis (EDA). One tool for getting students a quick win with learning data visualization is to use `ggplot2` with the helper package `esquisse` to give them a graphical user interface that helps them write `ggplot2` code. 
+Typically before building any models or doing other analysis, students benefit from learning to do basic exploritory data analysis (EDA). One tool for getting students a quick win with learning data visualization is to use `ggplot2` with the helper package `esquisse` to give them a graphical user interface that helps them write `ggplot2` code[@esquisse]. 
 
 Since `esquisse` is a CRAN package, it can be installed by running `install.packages("esquisse")`. After installation, `esquisse` shows up in the *Addins* menu of RStudio:
 
@@ -328,7 +347,7 @@ The strength of `esquisse` is that it produces the `ggplot2` code that allows th
 
 #### `ggpairs`
 
-A supplemental technique to explore data is to look at a pairs plot.  The `GGally` package provides a powerful tool with simple syntax that provide the user with a massive amount of clearly organized information about the data.  Install the library with `install.packages("GGally")`.
+A supplemental technique to explore data is to look at a pairs plot.  The `GGally` package provides a powerful tool with simple syntax that provide the user with a massive amount of clearly organized information about the data[@GGallys].  Install the library with `install.packages("GGally")`.
 
 A pairs plot does a good job of visualizing relationships between continuous variables or factors with a few levels.  In gapminder data, there are 142 different countries.  For this pairs plot, we will remove the `country` column for this visualization.
 
@@ -398,9 +417,9 @@ Other Assumptions:
 
 To verify the other assumptions, we need to create two plots.  The residual plots and a qqplot.
 
-To create the plots, we'll rely on the `lindia` [@lindia] package that makes diagnostic plots easy. If you do not have it installed already, execute `install.packages("lindia)`.
+To create the plots, we'll rely on the `lindia`[@lindia] package that makes diagnostic plots easy. If you do not have it installed already, execute `install.packages("lindia)`.
 
-```{r lindia, fig.width=12, fig.height=12}
+```{r lindia, fig.width=12, fig.height=12, message=FALSE, warning=FALSE}
 library(lindia)
 model2 %>%
   gg_diagnose(plot.all = TRUE, boxcox = TRUE)
@@ -447,7 +466,7 @@ summary(modeladj)
 
 Since our coeficients are still significant, we will take a look at the diagnostic plots to see if our assumptions are more plausible.  R makes it easy to repeat the same plots on the new model. 
 
-```{r lindiadiag2, fig.width=12, fig.height=12}
+```{r lindiadiag2, fig.width=12, fig.height=12, warning=FALSE,message=FALSE}
 library(lindia)
 modeladj %>%
   gg_diagnose(plot.all = TRUE, boxcox = TRUE) 
@@ -463,6 +482,7 @@ R is awesome! You should teach with it for several reasons:
 
 Free, easily accessable (unless you are on a government network), reproducable, relativly easy...
 
+# Bibliography
 
 <!-- Left for future deletion -->
 
@@ -722,7 +742,7 @@ Free, easily accessable (unless you are on a government network), reproducable, 
 
 
 
-# Bibliography
+
 
 <!-- @grolemund_wickham -->
 <!-- @long_teetor -->
