@@ -3,9 +3,9 @@ title: "Applied R in the Classroom"
 author: "JD Long & Dusty Turner"
 bibliography: bibliography.bib
 output:
+  word_document: default
   html_document:
     citation_package: biblatex
-  word_document: default
   pdf_document: default
 keep_tex: yes
 link-citations: yes
@@ -77,7 +77,7 @@ We've found that helping students organieze their files using projects from the 
 
 ### Tidyverse
 
-In addition to the RStudio IDE, the RStudio company supports the development of a number of open source packages designed to work together to make R easier to use and faster to learn. These libraries are collectivly known as the "Tidyverse". The most concise definition of the Tidyverse comes directly from its originator and core maintainer, Hadley Wickham:
+In addition to the RStudio IDE, the RStudio company supports the development of a number of open source packages designed to work together to make R easier to use and faster to learn. These libraries are collectivly known as the "Tidyverse". The most concise definition of the Tidyverse comes directly from its originator and core maintainer,  Wickham:
 
 > The tidyverse is a set of packages that work in harmony because they share 
 > common data representations and API design. The tidyverse package is designed 
@@ -91,7 +91,7 @@ The authors have had very good experiences with introducing learners to the Tidy
 
 The Tidyverse meta-package, like any CRAN package, can be installed from the R Console:
 
-```{r eval=FALSE, include=TRUE}
+```{r tidy, eval=FALSE, include=TRUE}
 install.packages("tidyverse")
 ```
 
@@ -139,7 +139,7 @@ To aide our instructions, we will explore the Gapminder data set.  The Gapminder
 
 Showing students how to load in example data is a crucial first step. Data can be easily loaded from the local file system:
 
-```{r message=FALSE, warning=FALSE}
+```{r readdata, message=FALSE, warning=FALSE}
 library(tidyverse)
 gapminder <- read_csv("01_data/gapminder.csv")
 ```
@@ -147,7 +147,7 @@ gapminder <- read_csv("01_data/gapminder.csv")
 Or directly from a URL:
 <!-- will be a 404 until the repo is public -->
 
-```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+```{r readdata2, eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
 gapminder <- read_csv("https://github.com/CerebralMastication/r_for_the_student/blob/master/01_data/gapminder.csv")
 ```
 
@@ -161,7 +161,7 @@ knitr::include_graphics("03_figures/environment.png")
 
 Simply outputting the code can tell students a bundle of information about the data just loaded.  Lets look at the output below.
 
-```{r eval=TRUE, message=FALSE, warning=FALSE,include=TRUE}
+```{r showgapminder, eval=TRUE, message=FALSE, warning=FALSE,include=TRUE}
 gapminder
 ```
 
@@ -171,13 +171,13 @@ Students also notice that printing out the data does not provude all the informa
 
 We recommend using the `skim` command from the `skimr` library.  You may need to download the `skimr` package from CRAN.
 
-```{r eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
+```{r installskimr, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 install.packages("skimr")
 ```
 
 <!-- What is your hack to make the histograms print out correctly? -->
 
-```{r, warning=FALSE, message=FALSE, results='asis'}
+```{r showskimr, warning=FALSE, message=FALSE, results='asis'}
 library(skimr)
 kable(skim(gapminder))
 ```
@@ -212,7 +212,7 @@ In order to motivate a student's use of the aformentioned verbs, we'll look to a
 
 To begin, we only need to work with certain columns.  The relevent columns to this question are `country`, `year`, `pop`, and `gdpPercap`.  We can make this selection using the `select` function.  The first argument in the `select` function is the data we which to select from.  The subsequent arguments are the names of the columns from the data we wish to select.  In the code below, we save our selected columns into a new tibble called `gapminder_selected`.
 
-```{r}
+```{r selected}
 gapminder_selected = select(gapminder, country, year, pop, gdpPercap)
 gapminder_selected
 ```
@@ -223,7 +223,7 @@ Once we view the data, we see that we now have 1704 rows with 4 columns.
 
 To further answer our question, we need to filter our data down to the years of interest.  We can achieve this goal using the `filter` function.  Like the `select` function, the first argument in the `filter` function is the data and subsequent argument is the logical statement of which you wish to filter.  In the code below, we filter our selected data and save our filtered data into a new tibble called `gapminder_filtered`.
 
-```{r}
+```{r filtered}
 gapminder_filtered = filter(gapminder_selected, year >= 1980)
 gapminder_filtered
 ```
@@ -234,7 +234,7 @@ Once we view the data, we see that our data now consist of years since 1980.
 
 The next step in answering our question is creating a column that contains the information of interest.  The `mutate` function creats new columns according to a specific function that we provide.  To answer our question, we need to determine the GDP in each year.  To find the GDP, we need to multiply the `gdpPercap` by the `pop`.  Similar to the previous two verbs, the first argument in the `mutate` function is the data.  Subsequent arguments are columns you wish to create with corresponding formulas.  In the code below, we mutate our filtered data and save our mutated data into a new tibble called `gapminder_mutated`.
 
-```{r}
+```{r mutated}
 gapminder_mutated = mutate(gapminder_filtered, GDP = gdpPercap * pop)
 gapminder_mutated
 ```
@@ -245,7 +245,7 @@ Once we view the data, we see the new column, GDP, has been added to the end of 
 
 The next step in answering our question will be to group our data by the topic of interest.  In this instance, since we want to know GDP by country, we need to group or data by country.  A way to conceptualize this step is to think of placing each group of data into a specific room.  In subsequent steps we will apply a function to each group (or room) of data.  Just like the previous verbs, the first argument in the `group_by` function is the data.  The following arguments are the columns you wish to group by.  In the code below, we group our mutated data and save our grouped data into a new tibble called `gapminder_grouped`.
 
-```{r}
+```{r grouped}
 gapminder_grouped =  group_by(gapminder_mutated, country) 
 gapminder_grouped
 ```
@@ -256,7 +256,7 @@ The reader will notice that there apears to be no change to the data.  This is m
 
 Next, in order to determine the average GDP by country, we need to apply a function to each group we have identified.  In this instance, we will need to take the average GDP over each continent.  Since we've already grouped by country, we simply need to apply the summarise function.  Like the previous verbs, the first argument in the `summarise` function is the data.  The following arguments are the function you would like to apply to each group.  In the code below, we summarise our grouped data and save our summarised data into a new tibble called `gapminder_summarised`.
 
-```{r}
+```{r summarise}
 gapminder_summarised = summarise(gapminder_grouped, AVG_GDP = mean(GDP))
 gapminder_summarised
 ```
@@ -267,7 +267,7 @@ We now have an answer to our question.  The tibble above shows the average GDP p
 
 However, we can refine our data to provide more understanding.  Currently, our data is sorted alphabetically by country.  This does not provide much insight.  We can use the `arrange` function to sort the data by average GDP; both assending and descending.  Like all other verbs, the first argument in the `arrange` function is the data.  The following argument is the column you wish to sort by.  In the code below, we arrange our summarised data and save our arranged data into a new tibble called `gapminder_arranged`.
 
-```{r}
+```{r arranged}
 gapminder_arragned = arrange(gapminder_summarised, AVG_GDP)
 gapminder_arragned
 ```
@@ -276,7 +276,7 @@ We see, from the output above, the countries with the smalled average GDP since 
 
 It may be more interesting, however, to sort the average GDP in descending order so we can learn the countries with the highest average GDP.  To do this we simply place a `-` sign in front of `AVG_GDP` in the call above.  
 
-```{r}
+```{r arrangeddesc}
 gapminder_arragned_descending = arrange(gapminder_summarised, -AVG_GDP)
 gapminder_arragned_descending
 ```
@@ -335,13 +335,13 @@ To highlight these tool, lets explore the linear relationship between several va
 
 To execute linear regression, we need to specify two arguments in the `lm` function: The formula and the data.  As you can see in the example below, our formula is in the format `y~x` - pronounced y by x.  As expected, the `data` is equal to `gapminder`.
 
-```{r}
+```{r mod1}
 model1 = lm(formula = lifeExp ~ gdpPercap, data = gapminder)
 ```
 
 R executes this command and saves it as `model1`.  To retrieve our simple linear regression model, we place `model1` in the summary command below.
 
-```{r}
+```{r mod1sum}
 summary(model1)
 ```
 
@@ -349,15 +349,15 @@ As you can see from the output, the student sees pertinent information about the
 
 Adjusting the linear model is simple.  Should we desire to add another factor to the model, we can do it simply by adding it to the formula like the example below.
 
-```{r}
+```{r mod2}
 model2 = lm(formula = lifeExp ~ gdpPercap + year, data = gapminder)
 summary(model2)
 ```
 
-Lastly, R's linear model function is flexible enought to easily add interaction terms.  Teaching using this syntax is a simple and easy to demonstrate.
+Lastly, R's linear model function is flexible enought to easily add interaction terms.  Teaching using this syntax is a simple and easy to demonstrate.  To add an interaction term between `gdpPercap` and `year`, we add a colin between the independent variables.  
 
-```{r}
-model3 = lm(formula = lifeExp ~ gdpPercap * year, data = gapminder)
+```{r mod3}
+model3 = lm(formula = lifeExp ~ gdpPercap + year + gdpPercap:year, data = gapminder)
 summary(model3)
 ```
 
@@ -372,134 +372,71 @@ One of the staples of teaching linear regression is helping students determine i
 
 Independent Observations: 
 
-To determine independence, we must know how the data was collected.  There are likely independence issues as the data on each country in the Gapminder collection are likely influenced by each other.  We'll acknowledge this and proceed on with the analysis.  
+To determine independence, we must know how the data was collected.  There are likely independence issues as the data for each country in the Gapminder collection are likely influenced by each other.  We'll acknowledge this and proceed on with the other assumptions.   
 
 Other Assumptions:
 
 To verify the other assumptions, we need to create two plots.  The residual plots and a qqplot.
 
-To create the residual plots, we'll explore model 2.  We need to create three plots.  The y axes for each plot will be the residuals (the observed life expectancy - the life expectancy predicted by our model).  The x axis for our three plots will be GDP Per Capita, year, and our predicted values.  
+To create the plots, we'll rely on the `lindia` [@lindia] package that makes diagnostic plots easy. If you do not have it installed already, execute `install.packages("lindia)`.
 
-We will need to crete the residuals to execute these plots.  We can do this as the code below specifies.
+```{r lindia, fig.width=12, fig.height=12}
+library(lindia)
+model2 %>%
+  gg_diagnose(plot.all = TRUE, boxcox = TRUE)
 
-```{r}
-predictions = predict.lm(object = model2, newdata = gapminder)
 ```
 
-We can easily add these predictions to our tibble for plotting with the tools we've previously learned.  Furthermore, we can calculate the redisuals in the next step.
+<!-- i love how this looks almost exactly like what i did in ggplot before 'by hand' -->
 
-```{r}
-gapminder_predicted = gapminder %>%
-  mutate(Fitted = predictions) %>%
-  mutate(residual = lifeExp - predictions)
-head(gapminder_predicted)
+```{r lindiaalt,include=FALSE, eval=FALSE}
+# i prefer the previous code chunk over this one because it clumps all my plots togeter (saves space for the paper and consolidates them for the student).  Do you agree?  I'm not wed to this.
+library(lindia)
+model2 %>%
+  gg_diagnose(plot.all = FALSE, boxcox = TRUE)
 ```
 
-Now we can use `ggplot` to create the three residual plots.
+```{r lindiaalt2,include=FALSE, eval=FALSE}
+# Just an FYI - this works too but I decided against it.  It makes the base R residual plots look ggplotty.  I don't love the base R diagnostic plots because they don't have a 'residuals vs x' plot for each 'x'.
 
-```{r}
-gapminder_predicted %>%
-  ggplot(aes(x = gdpPercap, y = residual)) +
-  geom_point() +
-  geom_hline(aes(yintercept = 0, color = "red"),
-             linetype = "dotdash",
-             size = 1) +
-  labs(x = "GDP Per Capita", y = "Residual", title = "Residual Plot (GDP Per Capita vs Residual)") +
-  theme(legend.position = "none")
-gapminder_predicted %>%
-  ggplot(aes(x = year, y = residual)) +
-  geom_point() +
-  geom_hline(aes(yintercept = 0, color = "red"),
-             linetype = "dotdash",
-             size = 1) +
-  labs(x = "Year", y = "Residual", title = "Residual Plot (GDP Per Capita vs Year)") +
-  theme(legend.position = "none")
-gapminder_predicted %>%
-  ggplot(aes(x = Fitted, y = residual)) +
-  geom_point() +
-  geom_hline(aes(yintercept = 0, color = "red"),
-             linetype = "dotdash",
-             size = 1) +
-  labs(x = "Fitted Values", y = "Residual", title = "Residual Plot (Fitted Values vs Residual)") +
-  theme(legend.position = "none")
+library(ggfortify)
+model2 %>%
+  autoplot()
 ```
 
-<!-- I could also do this and explain it, but is this too much? -->
+This command provides students a one stop shop for all diagnistic plots to evaluate assumption.  
+Normal Errors:
 
-```{r}
-gapminder_predicted %>%
-  mutate(Predictions = Fitted) %>%
-  # mutate(year = as.factor(year)) %>%
-  gather(XAxis, Value, year, gdpPercap, Fitted) %>%
-  ggplot(aes(x = Value, y = residual)) +
-  geom_point() +
-  facet_wrap(~ forcats::fct_relevel(XAxis, "gdpPercap", "year", "Fitted"),
-             scales = "free_x") +
-  geom_hline(aes(yintercept = 0, color = "red"),
-             linetype = "dotdash",
-             size = 1) +
-  labs(x = "X Values", "Residuals", "Residual Plots") +
-  theme(legend.position = "none")
-```
+From the plots, we see that our normality is slightly skewed in the positive direction and `gdpPercap` appears to be the culprit.  The qqplot also supports this conclusion as the observed standardized residuals are more extreme than what we would expect if the residuals followed the ideal theoretical z distirubtion.  
 
-The second plot we need to look at is the qqplot.
+Constant Variance:
 
-```{r}
-gapminder_predicted %>%
-  ggplot(aes(sample = residual)) +
-  stat_qq() +
-  stat_qq_line()
-```
+Variance of the residuals appears to remain constant at all levels of each x variable.  
 
+Linear Relationships: 
 
-We can see from the residual plots, that our model stands up well to consistant variance, however, linearity and normality of errors are suspect.  Lets apply a simple transformation to our model and see if it improves our residuals.
+The linearity assumption, however, seems to be violated at the `gdpPercap` and we also see evidence of this in the residuals vs fitted plot.  
 
+#### Transformations and Residual Revaluation
 
-```{r}
+From our previous critique, studetns should have all the information avilable to them to make decisions about how to improve their model.  To improve our analysis, we'll apply a transformation on `gdpPercap` to improve linearity and normality of errors.  A tranformation on the y variable is not necessary as we have no issues with constant variance and the Boxcox plot shows no value of lambda maximizes the log-liklihood of our model.  
+
+```{r modadj}
 modeladj = lm(formula = lifeExp ~ log(gdpPercap) + year, data = gapminder)
 summary(modeladj)
 ```
 
-We'll now re-run the same code as before and look at the change to our residuals to see how our change impacts our assumptions.
+Since our coeficients are still significant, we will take a look at the diagnostic plots to see if our assumptions are more plausible.  R makes it easy to repeat the same plots on the new model. 
 
-```{r}
-predictions = predict.lm(object = modeladj, newdata = gapminder)
-
-gapminder_predicted = gapminder %>%
-  mutate(Fitted = predictions) %>%
-  mutate(residual = lifeExp - predictions)
-
-gapminder_predicted %>%
-  ggplot(aes(x = gdpPercap, y = residual)) +
-  geom_point() +
-  geom_hline(aes(yintercept = 0, color = "red"),
-             linetype = "dotdash",
-             size = 1) +
-  labs(x = "GDP Per Capita", y = "Residual", title = "Residual Plot (GDP Per Capita vs Residual)") +
-  theme(legend.position = "none")
-gapminder_predicted %>%
-  ggplot(aes(x = year, y = residual)) +
-  geom_point() +
-  geom_hline(aes(yintercept = 0, color = "red"),
-             linetype = "dotdash",
-             size = 1) +
-  labs(x = "Year", y = "Residual", title = "Residual Plot (GDP Per Capita vs Year)") +
-  theme(legend.position = "none")
-gapminder_predicted %>%
-  ggplot(aes(x = Fitted, y = residual)) +
-  geom_point() +
-  geom_hline(aes(yintercept = 0, color = "red"),
-             linetype = "dotdash",
-             size = 1) +
-  labs(x = "Fitted Values", y = "Residual", title = "Residual Plot (Fitted Values vs Residual)") +
-  theme(legend.position = "none")
-gapminder_predicted %>%
-  ggplot(aes(sample = residual)) +
-  stat_qq() +
-  stat_qq_line()
+```{r lindiadiag2, fig.width=12, fig.height=12}
+library(lindia)
+modeladj %>%
+  gg_diagnose(plot.all = TRUE, boxcox = TRUE) 
 ```
 
-It appears that the consistancy of variance assumption is satisfied, however, the normality of errors is still a little suspect.
+While there is more work to be done to validate this model, we can see that our transformation has improved the normality of erros and has improved the linearity of `gdppercap`.  
+
+R makes this analysis easy for the student as the work is easily reproducable to other models, succint in its coding and output, and visually appealing.  
 
 ### Conclusion
 
@@ -508,15 +445,131 @@ R is awesome! You should teach with it for several reasons:
 Free, easily accessable (unless you are on a government network), reproducable, relativly easy...
 
 
-
-### Overarching questions:
-
-1) Does the introduction do what we want it to do?
-2) Does the tutorial piece speak correctly?  Meaning, should it be more like, "we find students benefit from this:" vs what it is currently: "Here, let me teach you the following"
-3) Should we mention how to actually execute a line of code or are we assuming that?
-
-
 <!-- Left for future deletion -->
+
+<!-- To create the residual plots, we'll explore model 2.  We need to create three plots.  The y axes for each plot will be the residuals (the observed life expectancy - the life expectancy predicted by our model).  The x axis for our three plots will be GDP Per Capita, year, and our predicted values.   -->
+
+<!-- We will need to crete the residuals to execute these plots.  We can do this as the code below specifies. -->
+
+<!-- ```{r} -->
+<!-- predictions = predict.lm(object = model2, newdata = gapminder) -->
+<!-- ``` -->
+
+<!-- We can easily add these predictions to our tibble for plotting with the tools we've previously learned.  Furthermore, we can calculate the redisuals in the next step. -->
+
+<!-- ```{r} -->
+<!-- gapminder_predicted = gapminder %>% -->
+<!--   mutate(Fitted = predictions) %>% -->
+<!--   mutate(residual = lifeExp - predictions) -->
+<!-- head(gapminder_predicted) -->
+<!-- ``` -->
+
+<!-- Now we can use `ggplot` to create the three residual plots. -->
+
+<!-- ```{r} -->
+<!-- gapminder_predicted %>% -->
+<!--   ggplot(aes(x = gdpPercap, y = residual)) + -->
+<!--   geom_point() + -->
+<!--   geom_hline(aes(yintercept = 0, color = "red"), -->
+<!--              linetype = "dotdash", -->
+<!--              size = 1) + -->
+<!--   labs(x = "GDP Per Capita", y = "Residual", title = "Residual Plot (GDP Per Capita vs Residual)") + -->
+<!--   theme(legend.position = "none") -->
+<!-- gapminder_predicted %>% -->
+<!--   ggplot(aes(x = year, y = residual)) + -->
+<!--   geom_point() + -->
+<!--   geom_hline(aes(yintercept = 0, color = "red"), -->
+<!--              linetype = "dotdash", -->
+<!--              size = 1) + -->
+<!--   labs(x = "Year", y = "Residual", title = "Residual Plot (GDP Per Capita vs Year)") + -->
+<!--   theme(legend.position = "none") -->
+<!-- gapminder_predicted %>% -->
+<!--   ggplot(aes(x = Fitted, y = residual)) + -->
+<!--   geom_point() + -->
+<!--   geom_hline(aes(yintercept = 0, color = "red"), -->
+<!--              linetype = "dotdash", -->
+<!--              size = 1) + -->
+<!--   labs(x = "Fitted Values", y = "Residual", title = "Residual Plot (Fitted Values vs Residual)") + -->
+<!--   theme(legend.position = "none") -->
+<!-- ``` -->
+
+<!-- <!-- I could also do this and explain it, but is this too much? --> -->
+
+<!-- ```{r} -->
+<!-- gapminder_predicted %>% -->
+<!--   mutate(Predictions = Fitted) %>% -->
+<!--   # mutate(year = as.factor(year)) %>% -->
+<!--   gather(XAxis, Value, year, gdpPercap, Fitted) %>% -->
+<!--   ggplot(aes(x = Value, y = residual)) + -->
+<!--   geom_point() + -->
+<!--   facet_wrap(~ forcats::fct_relevel(XAxis, "gdpPercap", "year", "Fitted"), -->
+<!--              scales = "free_x") + -->
+<!--   geom_hline(aes(yintercept = 0, color = "red"), -->
+<!--              linetype = "dotdash", -->
+<!--              size = 1) + -->
+<!--   labs(x = "X Values", "Residuals", "Residual Plots") + -->
+<!--   theme(legend.position = "none") -->
+<!-- ``` -->
+
+<!-- The second plot we need to look at is the qqplot. -->
+
+<!-- ```{r} -->
+<!-- gapminder_predicted %>% -->
+<!--   ggplot(aes(sample = residual)) + -->
+<!--   stat_qq() + -->
+<!--   stat_qq_line() -->
+<!-- ``` -->
+
+
+<!-- We can see from the residual plots, that our model stands up well to consistant variance, however, linearity and normality of errors are suspect.  Lets apply a simple transformation to our model and see if it improves our residuals. -->
+
+
+<!-- ```{r} -->
+<!-- modeladj = lm(formula = lifeExp ~ log(gdpPercap) + year, data = gapminder) -->
+<!-- summary(modeladj) -->
+<!-- ``` -->
+
+<!-- We'll now re-run the same code as before and look at the change to our residuals to see how our change impacts our assumptions. -->
+
+<!-- ```{r} -->
+<!-- predictions = predict.lm(object = modeladj, newdata = gapminder) -->
+
+<!-- gapminder_predicted = gapminder %>% -->
+<!--   mutate(Fitted = predictions) %>% -->
+<!--   mutate(residual = lifeExp - predictions) -->
+
+<!-- gapminder_predicted %>% -->
+<!--   ggplot(aes(x = gdpPercap, y = residual)) + -->
+<!--   geom_point() + -->
+<!--   geom_hline(aes(yintercept = 0, color = "red"), -->
+<!--              linetype = "dotdash", -->
+<!--              size = 1) + -->
+<!--   labs(x = "GDP Per Capita", y = "Residual", title = "Residual Plot (GDP Per Capita vs Residual)") + -->
+<!--   theme(legend.position = "none") -->
+<!-- gapminder_predicted %>% -->
+<!--   ggplot(aes(x = year, y = residual)) + -->
+<!--   geom_point() + -->
+<!--   geom_hline(aes(yintercept = 0, color = "red"), -->
+<!--              linetype = "dotdash", -->
+<!--              size = 1) + -->
+<!--   labs(x = "Year", y = "Residual", title = "Residual Plot (GDP Per Capita vs Year)") + -->
+<!--   theme(legend.position = "none") -->
+<!-- gapminder_predicted %>% -->
+<!--   ggplot(aes(x = Fitted, y = residual)) + -->
+<!--   geom_point() + -->
+<!--   geom_hline(aes(yintercept = 0, color = "red"), -->
+<!--              linetype = "dotdash", -->
+<!--              size = 1) + -->
+<!--   labs(x = "Fitted Values", y = "Residual", title = "Residual Plot (Fitted Values vs Residual)") + -->
+<!--   theme(legend.position = "none") -->
+<!-- gapminder_predicted %>% -->
+<!--   ggplot(aes(sample = residual)) + -->
+<!--   stat_qq() + -->
+<!--   stat_qq_line() -->
+<!-- ``` -->
+
+<!-- It appears that the consistancy of variance assumption is satisfied, however, the normality of errors is still a little suspect. -->
+
 
 <!-- One of the more common statistical tools students learn in Econometrics is Simple Linear Regression.  It happens to be one of many tools in R's arsonel.   -->
 
@@ -563,61 +616,61 @@ Free, easily accessable (unless you are on a government network), reproducable, 
 
 
 
-### text from prior draft left below for salvaging
+<!-- ### text from prior draft left below for salvaging -->
 
-## An example of how to cite in R
-
-
-With more than 275 practical recipes, this expanded edition [@teetor_long] helps you perform data analysis with R quickly and efficiently. The R language [@R-rmarkdown;@R-knitr] provides everything you need to do statistical work, but its structure can be difficult to master. These task-oriented recipes make you productive with R immediately. Solutions range from basic tasks to input and output, general statistics, graphics, and linear regression.
-
-Each recipe addresses a specific problem and includes a discussion that explains the solution and provides insight into how it works. If you're a beginner, R Cookbook will help get you started. If you're an intermediate user, this book will jog your memory and expand your horizons @grolemund_wickham. You'll get the job done faster and learn more about R in the process.
+<!-- ## An example of how to cite in R -->
 
 
+<!-- With more than 275 practical recipes, this expanded edition [@teetor_long] helps you perform data analysis with R quickly and efficiently. The R language [@R-rmarkdown;@R-knitr] provides everything you need to do statistical work, but its structure can be difficult to master. These task-oriented recipes make you productive with R immediately. Solutions range from basic tasks to input and output, general statistics, graphics, and linear regression. -->
+
+<!-- Each recipe addresses a specific problem and includes a discussion that explains the solution and provides insight into how it works. If you're a beginner, R Cookbook will help get you started. If you're an intermediate user, this book will jog your memory and expand your horizons @grolemund_wickham. You'll get the job done faster and learn more about R in the process. -->
 
 
-#### R Studio Layout
-
-One of the most common mistakes I run into in class on day one is for beginners to try to run R directly from the console.  They have R Studio downloaded, but do not understand the difference between R and R studio.  R is the program that executes all commands you provide.  It is the engine of the car, if you will.  R Studio is the shell that keeps the user organized.  R Studio is the shell around the car.  To continue, it is the steering wheel, accelerator, brakes, and seatbelts.  
-
-To ensure you have opened R Studio, you screen should be broken into 3 to 4 panels.  
-
-1) Top Right: The Environment
-2) Bottom Right: The Files Viewer (what do you call this quadrants?)
-3) Bottom Right: The Console
-4) Top Left: The Script
-
-Upon first opening R Studio, you may not have panel 4.  In order to open up a script, you will need to select `file` -> `New File` -> `R Script`.
-
-Many new users also make the mistke of not realizing that they have not opened up a script.  They begin executing in the console again and do not take advantage of the ease that scripts provide in writing reproducable code.  
-
-Possibly note on how to execute lines of code.  Both code chuncks and specific lines of code. 
-
-### Tidyverse 
-
-## Installation
-
-paraphrase what's in R Cookbook?
-
-### Installing R
-
-### Installing R Studio
-
-### Installing the Tidyverse
-
-## Using R
-
-### Loading Data
-
-### Plotting 
-
-quick intro to ggplot
-
-That graphical tool for ggplot?
 
 
-### Plotting Multivariate Data
+<!-- #### R Studio Layout -->
 
-ggpairs?
+<!-- One of the most common mistakes I run into in class on day one is for beginners to try to run R directly from the console.  They have R Studio downloaded, but do not understand the difference between R and R studio.  R is the program that executes all commands you provide.  It is the engine of the car, if you will.  R Studio is the shell that keeps the user organized.  R Studio is the shell around the car.  To continue, it is the steering wheel, accelerator, brakes, and seatbelts.   -->
+
+<!-- To ensure you have opened R Studio, you screen should be broken into 3 to 4 panels.   -->
+
+<!-- 1) Top Right: The Environment -->
+<!-- 2) Bottom Right: The Files Viewer (what do you call this quadrants?) -->
+<!-- 3) Bottom Right: The Console -->
+<!-- 4) Top Left: The Script -->
+
+<!-- Upon first opening R Studio, you may not have panel 4.  In order to open up a script, you will need to select `file` -> `New File` -> `R Script`. -->
+
+<!-- Many new users also make the mistke of not realizing that they have not opened up a script.  They begin executing in the console again and do not take advantage of the ease that scripts provide in writing reproducable code.   -->
+
+<!-- Possibly note on how to execute lines of code.  Both code chuncks and specific lines of code.  -->
+
+<!-- ### Tidyverse  -->
+
+<!-- ## Installation -->
+
+<!-- paraphrase what's in R Cookbook? -->
+
+<!-- ### Installing R -->
+
+<!-- ### Installing R Studio -->
+
+<!-- ### Installing the Tidyverse -->
+
+<!-- ## Using R -->
+
+<!-- ### Loading Data -->
+
+<!-- ### Plotting  -->
+
+<!-- quick intro to ggplot -->
+
+<!-- That graphical tool for ggplot? -->
+
+
+<!-- ### Plotting Multivariate Data -->
+
+<!-- ggpairs? -->
 
 
 
