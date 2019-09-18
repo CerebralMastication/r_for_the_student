@@ -129,9 +129,9 @@ There are 11 additional Tidyverse packages that get installed, but not automatic
 
 More info on each can be found at https://tidyverse.tidyverse.org
 
-## Harnessing The Power of R and the Tidyverse 
+## Harnessing The Power of R, Tidyverse, and other Helpful Packages 
 
-In the following sections, we will highlight some of the features of R and the `tidyverse` and how they can be useful in a classroom setting while teaching new students.  
+In the following sections, we will highlight some of the features of R and the `tidyverse` and how they can be useful in a classroom setting while teaching new students.  The reader will notice the authors use many packages to support their analysis and recommend teachers do the same when instructing students.  These prebuilt, add-on packages make syntax simple, easy to interpret, and less intimidaing for new users.  
 
 ### Loading Data (Gapminder)
 
@@ -150,6 +150,8 @@ Or directly from a URL:
 ```{r readdata2, eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
 gapminder <- read_csv("https://github.com/CerebralMastication/r_for_the_student/blob/master/01_data/gapminder.csv")
 ```
+
+> As a quick aside, a common stumbling block for students is executing lines of code.  RStudio makes this simple.  `Ctrl` + `Enter` (for Windows) or `Command`+`Enter` (for MAC) will execute the line of code where the cursor currently exists.  Students can also execute multiple lines of code by highliting the desired code and pressing `Ctrl` + `Enter` (or `Command`+`Enter`).
 
 Once the student reads the the data into R, the environment tab in the top right of the computer will reflect that the data is loaded.  
 
@@ -302,9 +304,11 @@ gapminder_arragned_descending_chained
 
 Some students may struggle to grasp this coding technique.  It may be helpful to explain the pipe in the following way:  A pipe takes the result of the previous fuction and 'pipes' it into the first argument of the next function.  In that way, we can chain together our verbs to manipulate and gain insight on the data.
 
-### Plotting/EDA
+### Plotting and Exploratory Data Analysis (EDA)
 
-From the preceeding example, you can see how to gain insight from data by manipulating the tibble with `dplyr` verbs. A more helpful way to gain insight from data is by viewing it graphically.  We'll go over plotting basics 
+From the preceeding example, you can see how to gain insight from data by manipulating the tibble with `dplyr` verbs. A more helpful way to gain insight from data is by viewing it graphically.  We'll go over plotting basics. 
+
+#### `esquisse`
 
 Typically before building any models or doing other analysis, students benefit from learning to do basic exploritory data analysis (EDA). One tool for getting students a quick win with learning data visualization is to use `ggplot2` with the helper package `esquisse` to give them a graphical user interface that helps them write `ggplot2` code. 
 
@@ -322,6 +326,22 @@ knitr::include_graphics("03_figures/esquisse.png")
 
 The strength of `esquisse` is that it produces the `ggplot2` code that allows the R learner to see how they can build the syntax themselves in the future. This gives students an increadible learning boost that reduces the likelyhood that they will get stuck when trying to make their first `ggplot2` figures. For more information about `esquisse` see the project CRAN web site: https://cran.r-project.org/web/packages/esquisse/readme/README.html
 
+#### `ggpairs`
+
+A supplemental technique to explore data is to look at a pairs plot.  The `GGally` package provides a powerful tool with simple syntax that provide the user with a massive amount of clearly organized information about the data.  Install the library with `install.packages("GGally")`.
+
+A pairs plot does a good job of visualizing relationships between continuous variables or factors with a few levels.  In gapminder data, there are 142 different countries.  For this pairs plot, we will remove the `country` column for this visualization.
+
+```{r ggpairs, message=FALSE, warning=FALSE}
+library(GGally)
+gapminder %>%
+  select(-country) %>%
+  ggpairs()
+```
+
+There is much to glean from the pairs plot.  We see that this tool provies pairwise plot and coorelations between continuous vaiabes and histograms and boxplots between discrete and continuous variables.  
+
+Briefly, we can see that there is an increasing life expectancy and population as year increases as well as several countries that seperate themselves from the pack.  An easily createable pairs plot like this can spingboard studetns into further analysis which we'll highlight in the next section. 
 
 ### Regression 
 
@@ -384,7 +404,6 @@ To create the plots, we'll rely on the `lindia` [@lindia] package that makes dia
 library(lindia)
 model2 %>%
   gg_diagnose(plot.all = TRUE, boxcox = TRUE)
-
 ```
 
 <!-- i love how this looks almost exactly like what i did in ggplot before 'by hand' -->
@@ -438,7 +457,7 @@ While there is more work to be done to validate this model, we can see that our 
 
 R makes this analysis easy for the student as the work is easily reproducable to other models, succint in its coding and output, and visually appealing.  
 
-### Conclusion
+## Conclusion
 
 R is awesome! You should teach with it for several reasons:
 
