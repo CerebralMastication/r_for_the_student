@@ -347,7 +347,7 @@ The strength of `esquisse` is that it produces the `ggplot2` code that allows th
 
 #### `ggpairs`
 
-A supplemental technique to explore data is to look at a pairs plot.  The `GGally` package provides a powerful tool with simple syntax that provide the user with a massive amount of clearly organized information about the data[@GGallys].  Install the library with `install.packages("GGally")`.
+A supplemental technique to explore data is to look at a pairs plot.  The `GGally` package provides a powerful tool with simple syntax that provide the user with a massive amount of clearly organized information about the data[@ggally].  Install the library with `install.packages("GGally")`.
 
 A pairs plot does a good job of visualizing relationships between continuous variables or factors with a few levels.  In gapminder data, there are 142 different countries.  For this pairs plot, we will remove the `country` column for this visualization.
 
