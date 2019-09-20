@@ -217,7 +217,7 @@ For the numeric class, `skim` provides mean, standard deviation (sd), and percen
 
 This clearly doesn't get the student to a full understanding of a dataset, but it's a good start.  With just a `skim` the student still does not understand which countries are in the data among other curiosities. We will provide more indepth methods of understanding the data in the plotting and Exploratory Data Analysis (EDA) section after we look briefly at the 6 `dplyr` verbs that allow students to begin rapidly understanding the data.  
 
-### `dplyr` Verbs
+### dplyr Verbs
 
 Almost any time a student works with data, they will need to manipulate that data in some way. Below, we will introduce the main 6 `dplyr` verbs to help wrangle data to gain additional insight. These verbs, `select`, `filter`, `mutate`, `group_by`, `summarize`, `arrange` are explained in detail below. 
 
@@ -233,7 +233,7 @@ In order to motivate a student's use of the aformentioned verbs, we'll look to a
 **What is the average GDP per country since 1980?**
 </center>
 
-#### Verb 1: `select`
+#### Verb 1: select
 
 To begin, we only need to work with certain columns. The relevent columns to this question are `country`, `year`, `pop`, and `gdpPercap`. We can make this selection using the `select` function. The first argument in the `select` function is the data we which to select from. The subsequent arguments are the names of the columns from the data we wish to select. In the code below, we save our selected columns into a new `tibble` called `gapminder_selected`.
 
@@ -245,7 +245,7 @@ gapminder_selected
 
 Once we view the data, we see that we now have 1704 rows but only 4 columns. 
 
-#### Verb 2: `filter`
+#### Verb 2: filter
 
 To further answer our question, we need to filter our data down to the years of interest. We can achieve this goal using the `filter` function. Like the `select` function, the first argument in the `filter` function is the data and subsequent argument is the logical statement of which you wish to filter. In the code below, we filter our selected data and save our filtered data into a new tibble called `gapminder_filtered`.
 
@@ -257,7 +257,7 @@ gapminder_filtered
 
 Once we view the data, we see that our data now consist of 852 rows, representing the years since 1980.
 
-#### Verb 3: `mutate`
+#### Verb 3: mutate
 
 The next step in answering our question is creating a column that contains the information of interest. The `mutate` function creats new columns according to a specific function that we provide. To answer our question, we need to determine the GDP in each year. To find the GDP, we need to multiply the `gdpPercap` by the `pop`. Similar to the previous two verbs, the first argument in the `mutate` function is the data. Subsequent arguments are columns you wish to create with corresponding formulas. In the code below, we mutate our filtered data and save our mutated data into a new tibble called `gapminder_mutated`.
 
@@ -269,7 +269,7 @@ gapminder_mutated
 
 Once we view the data, we see the new column, `GDP`, has been added to the end of our tibble. 
 
-#### Verb 4: `group_by`
+#### Verb 4: group_by
 
 The next step in answering our question will be to group our data by the field of interest. In this instance, since we want to know GDP by country, we need to group the data by country. A way to conceptualize this step is to think of placing each group of data into a specific room. In subsequent steps we will apply a function to each group (or room) of data. Just like the previous verbs, the first argument in the `group_by` function is the data. The following arguments are the columns you wish to group by. In the code below, we group our mutated data and save our grouped data into a new tibble called `gapminder_grouped`.
 
@@ -281,7 +281,7 @@ gapminder_grouped
 
 The reader will notice that there apears to be no change to the data. This is mostly true as we have simply told R that we would like to apply future functions over each group of data instead of over the entire tibble. The only difference in output is a note explaining the what the data has been grouped into and the number of groups. In this case, it explains the data is grouped by `country` and that there are 142 groups. 
 
-#### Verb 5: `summarise`
+#### Verb 5: summarise
 
 Next, in order to determine the average GDP by country, we need to apply a function to each group we have identified. In this instance, we will need to take the average GDP over each continent. Since we've already grouped by country, we next need to apply the summarise function. Like the previous verbs, the first argument in the `summarise` function is the data. The following arguments are the function to apply to each group. In the code below, we summarise the grouped data and save the summarised data into a new tibble called `gapminder_summarised`.
 
@@ -293,7 +293,7 @@ gapminder_summarised
 
 We now have an answer to our question. The tibble above shows the average GDP per country since 1980. 
 
-#### Verb 6: `arrange`
+#### Verb 6: arrange
 
 However, we can refine our result to provide more understanding. Currently, our data is sorted alphabetically by country. This does not provide much insight. We can use the `arrange` function to sort the data by average GDP; either assending or descending. Like all other verbs, the first argument in the `arrange` function is the data. The following arguments are the column you wish to sort by. In the code below, we arrange our summarised data and save our arranged data into a new tibble called `gapminder_arranged`.
 
