@@ -227,15 +227,7 @@ Almost any time a student works with data, they will need to manipulate that dat
 
 In order to motivate a student's use of the aformentioned verbs, we'll look to answer the following question: 
 
-<!-- for PDF output -->
-<!-- \begin{center} -->
-<!-- \textbf{What is the average GDP per country since 1980?} -->
-<!-- \end{center} -->
-
-<!-- for html output -->
-<center>
 **What is the average GDP per country since 1980?**
-</center>
 
 #### Verb 1: select
 
