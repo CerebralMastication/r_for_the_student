@@ -35,7 +35,7 @@ The authors of this article will make the case that the R open sourse statistica
 
 The the growth of the R Language can be appreciated if we look at the growth in R questions being asked on the popular question and answer site, Stack Overflow:[@stack]
 
-```{r stackoverflow, fig.cap='R Growth on Stack Overflow', echo=FALSE, fig.width=5, fig.height=3, message=FALSE, warning=FALSE, dpi=600, fig.align='center'}
+```{r stackoverflow, fig.cap='R Growth on Stack Overflow', echo=FALSE, fig.width=5, fig.height=3, message=FALSE, warning=FALSE, fig.align='left', dpi=300}
 # url <- "https://data.stackexchange.com/stackoverflow/csv/614151"
 # dat <- read_csv(url)
 # write_csv(dat, "01_data/stackoverflow.csv")
@@ -178,7 +178,7 @@ gapminder <- read_csv("https://github.com/CerebralMastication/r_for_the_student/
 
 Once the student reads the the data into R, the environment tab in the top right of the computer will reflect that the data is loaded. 
 
-```{r icons2, fig.cap='Environment With Gapminder Data', echo=FALSE, eval=TRUE, fig.width=3, fig.height=2}
+```{r icons2, fig.cap='Environment With Gapminder Data', echo=FALSE, eval=TRUE, out.width = "300px"}
 knitr::include_graphics("03_figures/environment.png")
 ```
 
@@ -338,7 +338,7 @@ Typically before building any models or doing other analysis, students benefit f
 
 Since `esquisse` is a CRAN package, it can be installed by running `install.packages("esquisse")`. After installation, `esquisse` shows up in the *Addins* menu of RStudio:
 
-```{r addins, fig.cap='Addins menu', echo=FALSE, eval=TRUE, fig.width=2}
+```{r addins, fig.cap='Addins menu', echo=FALSE, eval=TRUE, out.width = "300px"}
 knitr::include_graphics("03_figures/addins.png")
 ```
 
@@ -356,7 +356,7 @@ A supplemental technique to explore data is to look at a pairs plot. The `GGally
 
 A pairs plot does a good job of visualizing relationships between continuous variables or character variables. In gapminder data, there are 142 different countries. For this pairs plot, we will remove the `country` column for this visualization.
 
-```{r ggpairs, message=FALSE, warning=FALSE, dpi=600, fig.cap="Example Pairs Plot"}
+```{r ggpairs, message=FALSE, warning=FALSE,fig.width=8, fig.height=7, dpi=600, fig.cap="Example Pairs Plot"}
 library(GGally)
 gapminder %>%
  select(-country) %>%
@@ -428,7 +428,7 @@ To verify the other assumptions, we need to create two plots. The residual plots
 
 To create the plots, we'll rely on the `lindia`[@lindia] package that makes diagnostic plots easy. If you do not have it installed already, execute `install.packages("lindia)`.
 
-```{r lindia, fig.width=12, fig.height=12, message=FALSE, warning=FALSE}
+```{r lindia, fig.width=8, fig.height=8, dpi=600, message=FALSE, warning=FALSE}
 library(lindia)
 model2 %>%
  gg_diagnose(plot.all = TRUE, boxcox = TRUE)
@@ -460,7 +460,7 @@ summary(modeladj)
 
 Since our coefficients are still significant, we will take a look at the diagnostic plots to see if our assumptions are more plausible. R makes it easy to repeat the same plots on the new model. 
 
-```{r lindiadiag2, fig.width=12, fig.height=12, warning=FALSE,message=FALSE}
+```{r lindiadiag2, fig.width=8, fig.height=8, dpi=600, warning=FALSE,message=FALSE}
 modeladj %>%
  gg_diagnose(plot.all = TRUE, boxcox = TRUE) 
 ```
@@ -469,7 +469,7 @@ While there is more work to be done to validate this model, we can see that our 
 
 ## Conclusion
 
-R, along with supporting CRAN packages can be an excellent platform on which to teach analysis and modeling to students. The RStudio.cloud online environment is a solid hosted platform that helps reduce the friction of getting students started with R. And add on packages from CRAN like `tidyverse`, `lindia`, `GGally`, and `esquisse` can be combined together in a teaching environment to help students get tangible results quickly. We've found that students are willing to learn a considerable amount of R if we can make the on ramp to the basics quick and easy. We hope these tools help you and your students get up and running quickly with using R for data analysis and modeling.
+R, along with supporting CRAN packages can be an excellent platform on which to teach analysis and modeling to students. The RStudio.cloud online environment is a solid hosted platform that helps reduce the friction of getting students started with R. And add on packages from CRAN like `tidyverse`, `lindia`, `GGally`, and `esquisse` can be combined together in a teaching environment to help students get tangible results quickly. We've found that students are willing to learn a considerable amount of R if we can make the on ramp to the basics quick and easy. We hope these tools help you and your students get up and running quickly with using R for data analysis and modeling. And we think Adam Smith will be pleased to see the ease of the masters and the ease of the students aligned 
 
 
 # Bibliography
