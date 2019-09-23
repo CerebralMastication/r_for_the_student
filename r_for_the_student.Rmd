@@ -18,6 +18,9 @@ options(scipen=1, digits=2)
 
 ## Abstract
 
+R is an excellent teaching tool for learning exploritory data analysis (EDA) and regression analysis. While Base R provides all the functionality needed to do many things, learning can be greatly enhanced through the use of add in packages for R that can boost students up the learning curve and allow them to rapidly accelerate their understanding R and analysis in general. Using packages including `tidyverse`, `GGally`, `esquisse`, and `lindia` this paper walks through an example of basic EDA and regression analysis that might be used in an introduction class along with code examples of every step. Helping students up the learning curve of R can give them a platform on which to learn modeling and analysis as well as a set of skills they can take with them into industry or future academic persuits. 
+
+
 ## Introduction
 
 The Father of Modern Econometrics, Adam Smith, once frustratingly stated:
@@ -35,7 +38,7 @@ The authors of this article will make the case that the R open sourse statistica
 
 The the growth of the R Language can be appreciated if we look at the growth in R questions being asked on the popular question and answer site, Stack Overflow:[@stack]
 
-```{r stackoverflow, fig.cap='R Growth on Stack Overflow', echo=FALSE, fig.width=5, fig.height=3, message=FALSE, warning=FALSE, fig.align='left', dpi=300}
+```{r stackoverflow, fig.cap='R Growth on Stack Overflow', echo=FALSE, out.width = "300px", message=FALSE, warning=FALSE, fig.align='left', dpi=300}
 # url <- "https://data.stackexchange.com/stackoverflow/csv/614151"
 # dat <- read_csv(url)
 # write_csv(dat, "01_data/stackoverflow.csv")
@@ -76,7 +79,7 @@ For many instructors, the freely availiable RStudio.cloud service (http://rstudi
 knitr::include_graphics("03_figures/rstudio.cloud.png")
 ```
 
-Instructors who do not want to use the cloud solutions, or can't because of connectivity restrictions, can download and install R and RStudio on local hardware. For details on downloading and installing, see section 1.1 in R Cookbook Second Edition, available online at https://rc2e.com/gettingstarted#recipe-id001.
+Instructors who do not want to use the cloud solutions, or can't because of connectivity restrictions, can download and install R and RStudio on local hardware. For details on downloading and installing, see section 1.1 in R Cookbook [@teetor_long], available online at https://rc2e.com/gettingstarted#recipe-id001.
 
 ### Projects
 
@@ -363,7 +366,7 @@ gapminder %>%
  ggpairs()
 ```
 
-There is much to glean from the pairs plot. We see that this tool provides pairwise plot and correlations between continuous variables and histograms and boxplots between discrete and continuous variables. 
+There is much to glean from the pairs plot. We see that this tool provides pairwise plot and correlations between continuous variables and histograms and boxplots between discrete and continuous variables. While the *x* axis is pretty cramped, we can still get general trends and patterns from the pairs plot.
 
 Briefly, we can see that there is an increasing life expectancy and population as year increases as well as several countries that separate themselves from the pack. An easily creatable pairs plot like this can springboard students into further analysis which we'll highlight below. 
 
