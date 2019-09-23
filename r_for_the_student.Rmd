@@ -58,7 +58,7 @@ Equiping students  with a popular tool that enables them to work quickly while l
 
 ## The R Ecosystem
 
-The advantages to using R whether in an academic setting or industry are myriad. Since R and all the tooling we discuss below are open source, they have no financial costs to adoption. In addition, R has a very rich ecosystem of add-on packages that expand R and add functionality. These packages add features ranging from libraries to connect to commercial database systems to implementation of new machine learning algorithms. 
+The advantages to using R whether in an academic setting or industry are myriad. Since R and all the tooling we discuss below are open source, they have no financial costs to adoption. In addition, R has a very rich ecosystem of add-on packages that expand R and add functionality. These packages add features ranging from adding ability to connect to commercial database systems to implementation of new machine learning algorithms. 
 
 ### CRAN 
 
@@ -66,9 +66,9 @@ The online home of R is the Comprehensive R Archive Network, CRAN. CRAN is where
 
 ### RStudio
 
-When R is downloaded from CRAN, it comes with an engine for executing R code along with a few core packages for doing statistical analysis and graphics. Collectivly these tools are refered to as "Base R". Base R comes with a basic text editor for editing and executing R scprits. However most users quickly discover that writing R code is easier with an integrated developemnt environment (IDE). The most popular IDE for R is RStudio which we highly recommend for teaching.
+When R is downloaded from CRAN, it comes with an engine for executing R code along with a few core packages for doing statistical analysis and graphics. Collectivly these tools are refered to as "Base R". Base R comes with a basic text editor for editing and executing R scripts However, most users quickly discover that writing R code is easier with an integrated developemnt environment (IDE). The most popular IDE for R is RStudio Desktop which we highly recommend for teaching.
 
-RStudio desktop can be downloaded for free from RStudio.com. In additon to the desktop IDE, RStudio makes a server based IDE for using R on remote machines. RStudio server also is availiable in a professional version that offers more features such as authentication and collaborative editing. RStudio offers its professional tools to academics for free. Go to https://www.rstudio.com/pricing/academic-pricing/ for more info. 
+RStudio Desktop can be downloaded for free from RStudio.com. In additon to the desktop IDE, RStudio makes a server based IDE for using R on remote machines. RStudio Server is also availiable in a professional version that offers more features such as authentication and collaborative editing. RStudio offers its professional tools to academics for free. Go to https://www.rstudio.com/pricing/academic-pricing/ for more info. 
 
 For many instructors, the freely availiable RStudio.cloud service (http://rstudio.cloud) greatly simplifies instruction by providing a fully functional and configured R and RStudio environment running on cloud hosted hardware. For the rest of this article we will exclusivly use RStudio.cloud in our examples. Instructors can set up projects in RStudio.cloud and share those projects with students to simplify distributing course material.
 
@@ -80,15 +80,15 @@ Instructors who do not want to use the cloud solutions, or can't because of conn
 
 ### Projects
 
-RStudio introduces a powerful organizational tool called an RStudio Project. Projects help you by doing the following:
+RStudio introduces a powerful organizational tool called an RStudio Project. Projects help users by doing the following:
 
 - Storing RStudio project settings
-- Restoring window position in RStudio so when you return to a project you can pick up exactly where you left off
+- Restoring window position in RStudio so when a project is closed and repoened, window contents are preserved.
 - Setting the working directory 
 
 RStudio creates a project file with an *.Rproj* extension in the project directory. RStudio also creates a hidden directory, *.Rproj.user*, for temporary files related to your project.
 
-We've found that helping students organieze their files using projects from the start helps them build good practices and prevent lost files and file path related issues that can flummox new learners. Although instructors should expect to teach the basics of absolute and relative file paths, as this concept is sometimes new to learners and can slow learning. 
+We've found that helping students organize their files using projects from the start helps them build good practices and prevent lost files and file path related issues that can flummox new learners. Although instructors should expect to teach the basics of absolute and relative file paths, as this concept is sometimes new to learners and can slow learning. 
 
 ### Tidyverse
 
@@ -116,7 +116,7 @@ The packages listed below are in the "Core Tidyverse" and get loaded with `libra
 
 ***Core Tidyverse***
 
-`ggplot2`: data visualisation  
+`ggplot2`: data visualization  
 `dplyr`: data manipulation   
 `tidyr`: data reshaping  
 `readr`: data import  
@@ -155,11 +155,11 @@ More info on each can be found at https://tidyverse.tidyverse.org
 
 ## Harnessing The Power of R, Tidyverse, and other Helpful Packages 
 
-In the following sections, we will highlight some of the features of R and the `tidyverse` and how they can be useful in a classroom setting while teaching new students. The reader will notice the authors use many packages to support their analysis and recommend teachers do the same when instructing students. These prebuilt, add-on packages make syntax simple, easy to interpret, and less intimidaing for new users. 
+In the following sections, we will highlight some of the features of R and the `tidyverse` and how they can be useful in a classroom setting while teaching new students. The reader will notice the authors use many packages to support their analysis and recommend teachers do the same when instructing students. These prebuilt, add-on packages make syntax simple, easy to interpret, and less intimidating for new users. 
 
 ### Loading Data (Gapminder)
 
-To aide our instructions, we will explore the Gapminder data set. The Gapminder dataset is created by the Gapminder Foundation which is a non-profit which promots sustainable global development[@gapminder].
+To aide our instructions, we will explore the Gapminder data set. The Gapminder dataset is created by the Gapminder Foundation which is a non-profit which promotes sustainable global development[@gapminder].
 
 Showing students how to load in example data is a crucial first step. Data can be easily loaded from the local file system:
 
@@ -184,7 +184,7 @@ knitr::include_graphics("03_figures/environment.png")
 
 ### Initial Data Exploration
 
-Simply printing the resulting data frame can tell students a bundle of information about the data just loaded. Lets look at the output below.
+Simply printing the resulting data frame can tell students a bundle of information about the data just loaded. Let's look at the output below.
 
 ```{r showgapminder, eval=TRUE, message=FALSE, warning=FALSE,include=TRUE}
 gapminder
@@ -192,7 +192,7 @@ gapminder
 
 From the output above, one can see the `gapminder` dataset is a `tibble` consisting of 1,704 observational units with 6 columns of information. When reading in data, the `read_csv` command identifies the most likely class of data for each column. When we print the data out in R, the display lists the class below the column name. We can see that we have a mix of `character`s and `double`s. A `tibble` is a Tidyverse take on R's traditional `data.frame`. We've found that it usually is sufficient to tell students that `tibble` is a table. Since the goal is to get students using data to *do* things we often do not spend excessive time on definitions and instead focus on getting students doing something interesting. 
 
-Students also notice that printing out the data does not provude all the information they would like to know. One can see that the data has information about countries, but are they all Afghanistan? Likely no, as you can see there are 1,694 more rows and they probably are not all Afghanistan. Lets look at other ways to understand the data. 
+Students also notice that printing out the data does not provide all the information they would like to know. One can see that the data has information about countries, but are they all Afghanistan? Likely no, as you can see there are 1,694 more rows and they probably are not all Afghanistan. Let's look at other ways to understand the data. 
 
 We recommend using the `skim` command from the `skimr` library[@skimr]. You may need to download the `skimr` package from CRAN.
 
@@ -211,7 +211,7 @@ skim(gapminder)
 knitr::include_graphics("03_figures/skimr.png")
 ```
 
-This gives students a much better view of the data. `skim` seperates the data by class and provides important information for each data type. We find that the `skim` function gives students the quickest and best description of the data. Other options of presenting detailed information about the data include the `summary(gapminder)` and `glimpse(gapminder)`. But we typically only teach one of these just get the students looking at the data and not worrying with pros and cons of each way of looking at the data. 
+This gives students a much better view of the data. `skim` separates the data by class and provides important information for each data type. We find that the `skim` function gives students the quickest and best description of the data. Other options of presenting detailed information about the data include the `summary(gapminder)` and `glimpse(gapminder)`. But we typically only teach one of these just get the students looking at the data and not worrying with pros and cons of each way of looking at the data. 
 
 In the output above, for each class of data (`character`/`numeric`), `skim` provides how many missing, complete, and total (n) observations for each column.
 
@@ -219,19 +219,19 @@ For the character class, `skim` provides additional information about each colum
 
 For the numeric class, `skim` provides mean, standard deviation (sd), and percentile breaks (p0, p25,...,p100). It also provides a small histogram to help visualize the distribution of your numeric data (hist).
 
-This clearly doesn't get the student to a full understanding of a dataset, but it's a good start.  With just a `skim` the student still does not understand which countries are in the data among other curiosities. We will provide more indepth methods of understanding the data in the plotting and Exploratory Data Analysis (EDA) section after we look briefly at the 6 `dplyr` verbs that allow students to begin rapidly understanding the data.  
+This clearly doesn't get the student to a full understanding of a dataset, but it's a good start.  With just a `skim` the student still does not understand which countries are in the data among other curiosities. We will provide more in-depth methods of understanding the data in the plotting and Exploratory Data Analysis (EDA) section after we look briefly at the 6 `dplyr` verbs that allow students to begin rapidly understanding the data.  
 
 ### dplyr Verbs
 
 Almost any time a student works with data, they will need to manipulate that data in some way. Below, we will introduce the main 6 `dplyr` verbs to help wrangle data to gain additional insight. These verbs, `select`, `filter`, `mutate`, `group_by`, `summarize`, `arrange` are explained in detail below. 
 
-In order to motivate a student's use of the aformentioned verbs, we'll look to answer the following question: 
+In order to motivate a student's use of the aforementioned verbs, we'll look to answer the following question: 
 
 **What is the average GDP per country since 1980?**
 
 #### Verb 1: select
 
-To begin, we only need to work with certain columns. The relevent columns to this question are `country`, `year`, `pop`, and `gdpPercap`. We can make this selection using the `select` function. The first argument in the `select` function is the data we which to select from. The subsequent arguments are the names of the columns from the data we wish to select. In the code below, we save our selected columns into a new `tibble` called `gapminder_selected`.
+To begin, we only need to work with certain columns. The relevant columns to this question are `country`, `year`, `pop`, and `gdpPercap`. We can make this selection using the `select` function. The first argument in the `select` function is the data we which to select from. The subsequent arguments are the names of the columns from the data we wish to select. In the code below, we save our selected columns into a new `tibble` called `gapminder_selected`.
 
 ```{r selected}
 gapminder_selected = select(gapminder, country, year, pop, gdpPercap)
@@ -255,7 +255,7 @@ Once we view the data, we see that our data now consist of 852 rows, representin
 
 #### Verb 3: mutate
 
-The next step in answering our question is creating a column that contains the information of interest. The `mutate` function creats new columns according to a specific function that we provide. To answer our question, we need to determine the GDP in each year. To find the GDP, we need to multiply the `gdpPercap` by the `pop`. Similar to the previous two verbs, the first argument in the `mutate` function is the data. Subsequent arguments are columns you wish to create with corresponding formulas. In the code below, we mutate our filtered data and save our mutated data into a new tibble called `gapminder_mutated`.
+The next step in answering our question is creating a column that contains the information of interest. The `mutate` function creates new columns according to a specific function that we provide. To answer our question, we need to determine the GDP in each year. To find the GDP, we need to multiply the `gdpPercap` by the `pop`. Similar to the previous two verbs, the first argument in the `mutate` function is the data. Subsequent arguments are columns you wish to create with corresponding formulas. In the code below, we mutate our filtered data and save our mutated data into a new tibble called `gapminder_mutated`.
 
 ```{r mutated}
 gapminder_mutated = mutate(gapminder_filtered, GDP = gdpPercap * pop)
@@ -275,7 +275,7 @@ gapminder_grouped = group_by(gapminder_mutated, country)
 gapminder_grouped
 ```
 
-The reader will notice that there apears to be no change to the data. This is mostly true as we have simply told R that we would like to apply future functions over each group of data instead of over the entire tibble. The only difference in output is a note explaining the what the data has been grouped into and the number of groups. In this case, it explains the data is grouped by `country` and that there are 142 groups. 
+The reader will notice that there appears to be no change to the data. This is mostly true as we have simply told R that we would like to apply future functions over each group of data instead of over the entire tibble. The only difference in output is a note explaining the what the data has been grouped into and the number of groups. In this case, it explains the data is grouped by `country` and that there are 142 groups. 
 
 #### Verb 5: summarise
 
@@ -291,7 +291,7 @@ We now have an answer to our question. The tibble above shows the average GDP pe
 
 #### Verb 6: arrange
 
-However, we can refine our result to provide more understanding. Currently, our data is sorted alphabetically by country. This does not provide much insight. We can use the `arrange` function to sort the data by average GDP; either assending or descending. Like all other verbs, the first argument in the `arrange` function is the data. The following arguments are the column you wish to sort by. In the code below, we arrange our summarised data and save our arranged data into a new tibble called `gapminder_arranged`.
+However, we can refine our result to provide more understanding. Currently, our data is sorted alphabetically by country. This does not provide much insight. We can use the `arrange` function to sort the data by average GDP; either ascending or descending. Like all other verbs, the first argument in the `arrange` function is the data. The following arguments are the column you wish to sort by. In the code below, we arrange our summarised data and save our arranged data into a new tibble called `gapminder_arranged`.
 
 ```{r arranged}
 gapminder_arragned = arrange(gapminder_summarised, AVG_GDP)
@@ -299,7 +299,7 @@ gapminder_arragned = arrange(gapminder_summarised, AVG_GDP)
 gapminder_arragned
 ```
 
-We see, from the output above, the countries with the smalled average GDP since 1980. 
+We see, from the output above, the countries with the smallest average GDP since 1980. 
 
 It may be more interesting, however, to sort the average GDP in descending order so we can learn the countries with the highest average GDP. To do this we simply place a `-` sign in front of `AVG_GDP` in the call above. 
 
@@ -311,7 +311,7 @@ gapminder_arragned_descending
 
 #### Simplifying Code with the Pipe Operator: `%>%` 
 
-After helping learners see how each function works we can introduce the pipe operator (`%>%`) that can be used to chain together commands and pass the results of one functiopn directly into the next function. This can result in very logical data manipulation steps that are easy to learn and easy to understand:
+After helping learners see how each function works we can introduce the pipe operator (`%>%`) that can be used to chain together commands and pass the results of one function directly into the next function. This can result in very logical data manipulation steps that are easy to learn and easy to understand:
 
 ```{r pipechain}
 gapminder_arragned_descending_chained =
@@ -326,15 +326,15 @@ gapminder_arragned_descending_chained =
 gapminder_arragned_descending_chained
 ```
 
-To help students understand the role of the pipe we often explain the operator as follows: A pipe takes the result of the previous fuction and 'pipes' it into the first argument of the next function. In that way, we can chain together our verbs to manipulate and gain insight on the data. We find the pipe helpful in creating analysis code that's easy to read and follow. 
+To help students understand the role of the pipe we often explain the operator as follows: A pipe takes the result of the previous function and 'pipes' it into the first argument of the next function. In that way, we can chain together our verbs to manipulate and gain insight on the data. We find the pipe helpful in creating analysis code that's easy to read and follow. 
 
 ### Plotting and Exploratory Data Analysis (EDA)
 
-From the preceeding example, you can see one way for studnets to gain insight from data by manipulating the `tibble` with `dplyr` verbs. In addition, it's important for stuents to gain insight from data is by viewing it graphically. Let's look briefly at some plotting basics and how to help students *quickly* get some data visualizations. 
+From the preceding example, you can see one way for students to gain insight from data by manipulating the `tibble` with `dplyr` verbs. In addition, it's important for students to gain insight from data is by viewing it graphically. Let's look briefly at some plotting basics and how to help students *quickly* get some data visualizations. 
 
 #### `esquisse`
 
-Typically before building any models or doing other analysis, students benefit from learning to do basic exploritory data analysis (EDA). One tool for getting students a quick win with learning data visualization is to use `ggplot2` with the helper package `esquisse` to give them a graphical user interface for basic `ggplot2` code [@esquisse]. `esquisse` supports only a subset of the myriad of features availiable in `ggplot2` but because it's a drag and drop GUI it's a huge helper in getting students seeing how code can take data and turn it into tangible visualizations. 
+Typically before building any models or doing other analysis, students benefit from learning to do basic exploratory data analysis (EDA). One tool for getting students a quick win with learning data visualization is to use `ggplot2` with the helper package `esquisse` to give them a graphical user interface for basic `ggplot2` code [@esquisse]. `esquisse` supports only a subset of the myriad of features available in `ggplot2` but because it's a drag and drop GUI it's a huge helper in getting students seeing how code can take data and turn it into tangible visualizations. 
 
 Since `esquisse` is a CRAN package, it can be installed by running `install.packages("esquisse")`. After installation, `esquisse` shows up in the *Addins* menu of RStudio:
 
@@ -348,7 +348,7 @@ The `'ggplot2' builder` menu option opens the graphical interface for building `
 knitr::include_graphics("03_figures/esquisse.png")
 ```
 
-The strength of `esquisse` is that it produces the `ggplot2` code that allows the R learner to see how they can build the syntax themselves in the future. This gives students an increadible learning boost that reduces the likelyhood that they will get stuck when trying to make their first `ggplot2` figures. For more information about `esquisse` see the project CRAN web site: https://cran.r-project.org/web/packages/esquisse/readme/README.html
+The strength of `esquisse` is that it produces the `ggplot2` code that allows the R learner to see how they can build the syntax themselves in the future. This gives students an incredible learning boost that reduces the likelihood that they will get stuck when trying to make their first `ggplot2` figures. For more information about `esquisse` see the project CRAN web site: https://cran.r-project.org/web/packages/esquisse/readme/README.html
 
 #### `ggpairs`
 
@@ -363,17 +363,17 @@ gapminder %>%
  ggpairs()
 ```
 
-There is much to glean from the pairs plot. We see that this tool provies pairwise plot and coorelations between continuous vaiabes and histograms and boxplots between discrete and continuous variables. 
+There is much to glean from the pairs plot. We see that this tool provides pairwise plot and correlations between continuous variables and histograms and boxplots between discrete and continuous variables. 
 
-Briefly, we can see that there is an increasing life expectancy and population as year increases as well as several countries that seperate themselves from the pack. An easily createable pairs plot like this can spingboard studetns into further analysis which we'll highlight below. 
+Briefly, we can see that there is an increasing life expectancy and population as year increases as well as several countries that separate themselves from the pack. An easily creatable pairs plot like this can springboard students into further analysis which we'll highlight below. 
 
 ### Regression 
 
-One of the more common statistical tools students learn in Econometrics is Linear Regression. It happens to be one of many tools in R's arsonel.
+One of the more common statistical tools students learn in Econometrics is Linear Regression. It happens to be one of many tools in R's arsenal.
 
 In the base stats package and with one additional library, R offers easy to execute and simple to understand tools to execute everything we would expect a student to learn in linear regression. 
 
-To highlight these tool, lets explore the linear relationship between several variables and life expectancy (`lifeExp`) in the Gapminder data.
+To highlight these tool, let's explore the linear relationship between several variables and life expectancy (`lifeExp`) in the Gapminder data.
 
 #### Simple Linear Regression
 
@@ -399,7 +399,7 @@ model2 = lm(formula = lifeExp ~ gdpPercap + year, data = gapminder)
 summary(model2)
 ```
 
-Lastly, R's linear model function is flexible enought to easily add interaction terms. To add an interaction term between `gdpPercap` and `year`, we add a colon between the independent variables. 
+Lastly, R's linear model function is flexible enough to easily add interaction terms. To add an interaction term between `gdpPercap` and `year`, we add a colon between the independent variables. 
 
 ```{r mod3}
 model3 = lm(formula = lifeExp ~ gdpPercap + year + gdpPercap:year, data = gapminder)
@@ -413,7 +413,7 @@ One of the staples of teaching linear regression is helping students determine i
 
 1) Independent Observations
 2) Normal Errors
-3) Consistant Variance
+3) Consistent Variance
 4) Linear Relationships
 
 Let's look briefly at how we try to help students think about each of these assumptions using R code where helpful.
@@ -438,7 +438,7 @@ The `gg_diagnose` command provides students a one stop shop for all diagnistic p
 
 **Normal Errors:**
 
-From the plots, we see that our normality is slightly skewed in the positive direction and `gdpPercap` appears to be the culprit. The `qqplot` also supports this conclusion as the observed standardized residuals are more extreme than what we would expect if the residuals followed the ideal theoretical *z* distirubtion. 
+From the plots, we see that our normality is slightly skewed in the positive direction and `gdpPercap` appears to be the culprit. The `qqplot` also supports this conclusion as the observed standardized residuals are more extreme than what we would expect if the residuals followed the ideal theoretical *z* distribution. 
 
 **Constant Variance:**
 
@@ -450,7 +450,7 @@ The linearity assumption, however, seems to be violated at the `gdpPercap` and w
 
 #### Transformations and Residual Revaluation
 
-From our previous critique, and after some instruction on how to interpritate the results, students should have all the information avilable to them to make decisions about how to improve their model. To improve our example analysis, we'll apply a transformation on `gdpPercap` to improve linearity and normality of errors. A tranformation on the *y* variable is not necessary as we have no issues with constant variance and the Boxcox plot shows no value of lambda maximizes the log-liklihood of our model. 
+From our previous critique, and after some instruction on how to interpret the results, students should have all the information available to them to make decisions about how to improve their model. To improve our example analysis, we'll apply a transformation on `gdpPercap` to improve linearity and normality of errors. A transformation on the *y* variable is not necessary as we have no issues with constant variance and the Boxcox plot shows no value of lambda maximizes the log-likelihood of our model. 
 
 ```{r modadj}
 modeladj = lm(formula = lifeExp ~ log(gdpPercap) + year, data = gapminder)
@@ -458,7 +458,7 @@ modeladj = lm(formula = lifeExp ~ log(gdpPercap) + year, data = gapminder)
 summary(modeladj)
 ```
 
-Since our coeficients are still significant, we will take a look at the diagnostic plots to see if our assumptions are more plausible. R makes it easy to repeat the same plots on the new model. 
+Since our coefficients are still significant, we will take a look at the diagnostic plots to see if our assumptions are more plausible. R makes it easy to repeat the same plots on the new model. 
 
 ```{r lindiadiag2, fig.width=12, fig.height=12, warning=FALSE,message=FALSE}
 modeladj %>%
@@ -469,7 +469,7 @@ While there is more work to be done to validate this model, we can see that our 
 
 ## Conclusion
 
-R, along with supporting CRAN pacakges can be an excellent platform on which to teach analysis and modeling to students. The RStudio.cloud online environment is a solid hosted platform that helps reduce the friction of getting students started with R. And add on packages from CRAN like `tidyverse`, `lindia`, `GGally`, and `esquisse` can be combined together in a teaching environment to help students get tangible results quickly. We've found that students are willing to learn a considerable amount of R if we can make the on ramp to the basics quick and easy. We hope these tools help you and your students get up and running quickly with using R for data analysis and modeling.
+R, along with supporting CRAN packages can be an excellent platform on which to teach analysis and modeling to students. The RStudio.cloud online environment is a solid hosted platform that helps reduce the friction of getting students started with R. And add on packages from CRAN like `tidyverse`, `lindia`, `GGally`, and `esquisse` can be combined together in a teaching environment to help students get tangible results quickly. We've found that students are willing to learn a considerable amount of R if we can make the on ramp to the basics quick and easy. We hope these tools help you and your students get up and running quickly with using R for data analysis and modeling.
 
 
 # Bibliography
