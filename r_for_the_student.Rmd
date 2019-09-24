@@ -6,7 +6,8 @@ output:
  word_document:
   reference_docx: template.docx
 link-citations: yes
-csl: chicago-library-list.csl
+csl: austral-ecology.csl
+# csl: chicago-library-list.csl
 biblio-style: authoryear
 ---
 
