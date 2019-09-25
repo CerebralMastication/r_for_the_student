@@ -153,8 +153,6 @@ There are 11 additional Tidyverse packages that install, but do not automaticall
 `modelr`: modeling pipelines  
 `broom`: takes model results and makes them tidy
 
-<!-- i used what's on https://github.com/tidyverse/tidyverse... I'm assuming this is the most up to date -->
-
 More info on each can be found at https://tidyverse.tidyverse.org.
 
 ## Harnessing The Power of R, Tidyverse, and other Helpful Packages 
@@ -174,7 +172,7 @@ gapminder <- read_csv("01_data/gapminder.csv")
 
 Or directly from a URL:
 
-```{r readdata2, eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+```{r readdata2, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 gapminder <- read_csv("https://github.com/CerebralMastication/r_for_the_student/blob/master/01_data/gapminder.csv")
 ```
 
@@ -203,8 +201,6 @@ We recommend using the `skim` command from the `skimr` library [@skimr]. Student
 ```{r installskimr, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 install.packages("skimr")
 ```
-
-<!-- What is your hack to make the histograms print out correctly? -->
 
 ```{r showskimr, echo=TRUE, eval=FALSE }
 library(skimr)
