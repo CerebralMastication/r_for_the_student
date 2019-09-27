@@ -5,6 +5,7 @@ bibliography: bibliography.bib
 output:
  word_document:
   reference_docx: template.docx
+  fig_caption: yes
 link-citations: yes
 csl: austral-ecology.csl
 # csl: chicago-library-list.csl
