@@ -3,7 +3,7 @@ title: "Applied R in the Classroom"
 author: "JD Long & Dusty Turner"
 bibliography: bibliography.bib
 output:
- word_document:
+ bookdown::word_document2:
   reference_docx: template.docx
   fig_caption: yes
 link-citations: yes
