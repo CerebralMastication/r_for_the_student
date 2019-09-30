@@ -93,7 +93,7 @@ RStudio introduces a powerful organizational tool called an RStudio Project. Pro
 
 RStudio creates a project file with an *.Rproj* extension in the project directory. RStudio also creates a hidden directory, *.Rproj.user*, for temporary files related to your project.
 
-We've found that helping students organize their files using projects from the start helps students build good organizational practices and prevents lost files and file path related issues that commonly flummox new learners. Although instructors should expect to teach the basics of absolute and relative file paths, as this concept is sometimes new to learners and can slow the learning progress. 
+We have found that helping students organize their files using projects from the start helps students build good organizational practices and prevents lost files and file path related issues that commonly flummox new learners. Although instructors should expect to teach the basics of absolute and relative file paths, as this concept is sometimes new to learners and can slow the learning progress. 
 
 ### Tidyverse
 
@@ -156,13 +156,13 @@ There are 11 additional Tidyverse packages that install, but do not automaticall
 
 More info on each can be found at https://tidyverse.tidyverse.org.
 
-## Harnessing The Power of R, Tidyverse, and other Helpful Packages 
+## Harnessing the Power of R, Tidyverse, and other Helpful Packages 
 
 In the following sections, we will highlight some of the features of R and the `tidyverse` and how they can be useful in a classroom setting while teaching new students. The reader will notice the authors use many packages to support their analysis and recommend teachers do the same when instructing students. These prebuilt, add-on packages make syntax simple, easy to interpret, and less intimidating for new users. 
 
 ### Loading Data (Gapminder)
 
-To aide our instructions, we will explore the Gapminder data set. The Gapminder dataset is created by the Gapminder Foundation which is a non-profit organization that promotes sustainable global development [@gapminder].
+To aide our instructions, we will explore the Gapminder data set. The Gapminder data set is created by the Gapminder Foundation which is a non-profit organization that promotes sustainable global development [@gapminder].
 
 Showing students how to load in example data is a crucial first step. Data can be easily loaded from the local file system:
 
@@ -177,7 +177,7 @@ Or directly from a URL:
 gapminder <- read_csv("https://raw.githubusercontent.com/CerebralMastication/r_for_the_student/master/01_data/gapminder.csv")
 ```
 
-> As a quick aside, a common stumbling block for students is executing lines of code. RStudio makes this simple. `Ctrl` + `Enter` (for Windows) or `Command`+`Enter` (for MAC) will execute the line of code where the cursor currently exists. Students can also execute multiple lines of code by highliting the desired code and pressing `Ctrl` + `Enter` (or `Command`+`Enter`).
+> As a quick aside, a common stumbling block for students is executing lines of code. RStudio makes this simple. `Ctrl` + `Enter` (for Windows) or `Command`+`Enter` (for MAC) will execute the line of code where the cursor currently exists. Students can also execute multiple lines of code by highliting the desired code and pressing `Ctrl` + `Enter` (Windows) or `Command`+`Enter`(MAC).
 
 Once the student reads the the data into R, the environment tab in the top right of the computer will reflect that the data is loaded. 
 
@@ -193,7 +193,7 @@ Simply printing the resulting data frame can tell students a bundle of informati
 gapminder
 ```
 
-From the output above, one can see the `gapminder` dataset is a `tibble` consisting of 1,704 observational units with 6 columns of information. When reading in data, the `read_csv` command identifies the most likely class of data for each column. When we print the data out in R, the display lists the class below the column name. We can see that we have a mix of `character` and `double` class types. A `tibble` is a Tidyverse take on R's traditional `data.frame`. We have found that it usually is sufficient to tell students that "a `tibble` is a table." Since the goal is to get students using data to *do* things we often do not spend excessive time on definitions and instead focus on helping students doing something interesting. 
+From the output above, one can see the `gapminder` data set is a `tibble` consisting of 1,704 observational units with 6 columns of information. When reading in data, the `read_csv` command identifies the most likely class of data for each column. When we print the data out in R, the display lists the class below the column name. We can see that we have a mix of `character` and `double` class types. A `tibble` is a Tidyverse take on R's traditional `data.frame`. We have found that it usually is sufficient to tell students that "a `tibble` is a table." Since the goal is to get students using data to *do* things we often do not spend excessive time on definitions and instead focus on helping students doing something interesting. 
 
 Students also notice that printing out the data does not provide everything an analyst would like to now about the data. One can see that the output provides information about countries, but are they all Afghanistan? Likely no, as you can see there are 1,694 more rows and they probably are not all Afghanistan. Let's look at other ways to understand the data. 
 
@@ -220,13 +220,13 @@ For the character class, `skim` provides additional information about each colum
 
 For the numeric class, `skim` provides mean, standard deviation (sd), and percentile breaks (p0, p25,...,p100). It also provides a small histogram to help visualize the distribution of your numeric data (hist).
 
-This clearly does not give the student to a full understanding of a dataset, but it is a good start.  With just a `skim` the student still does not understand which countries are in the data and many other curiosities. We will provide more in-depth methods of understanding the data in the Plotting and Exploratory Data Analysis (EDA) section after we look briefly at the 6 `dplyr` verbs that allow students to begin rapidly understanding the data.  
+This clearly does not give the student to a full understanding of a data set, but it is a good start.  With just a `skim` the student still does not understand which countries are in the data and many other curiosities. We will provide more in-depth methods of understanding the data in the Plotting and Exploratory Data Analysis (EDA) section after we look briefly at the 6 `dplyr` verbs that allow students to begin rapidly understanding the data.  
 
 ### dplyr Verbs
 
 Almost any time a student works with data, they will need to manipulate that data in some way. Below, we will introduce the main 6 `dplyr` verbs to help wrangle data to gain additional insight. These verbs, `select`, `filter`, `mutate`, `group_by`, `summarize`, `arrange` are explained in detail below. 
 
-In order to motivate use of the aforementioned verbs, we'll look to answer the following question: 
+In order to motivate use of the aforementioned verbs, we will look to answer the following question: 
 
 **What is the average GDP per country since 1980?**
 
@@ -280,7 +280,7 @@ Students will notice that there appears to be no change to the data. This is mos
 
 #### Verb 5: summarise
 
-Next, in order to determine the average GDP by country, we need to apply a function to each group we have identified. Specifically, we will need to take the average GDP over each continent. Since we've already grouped by country, we next need to apply the summarise function. Like the previous verbs, the first argument in the `summarise` function is the data. The following arguments are the function to apply to each group. In the code below, we summarise the grouped data and save the summarised data into a new tibble called `gapminder_summarised`.
+Next, in order to determine the average GDP by country, we need to apply a function to each group we have identified. Specifically, we will need to take the average GDP over each continent. Since we have already grouped by country, we next need to apply the summarise function. Like the previous verbs, the first argument in the `summarise` function is the data. The following arguments are the function to apply to each group. In the code below, we summarise the grouped data and save the summarised data into a new tibble called `gapminder_summarised`.
 
 ```{r summarise}
 gapminder_summarised = summarise(gapminder_grouped, AVG_GDP = mean(GDP))
@@ -422,13 +422,13 @@ Let's look briefly at how we help students think about each of these assumptions
 
 Independent Observations: 
 
-To determine independence, we must know how the data was collected. There are likely independence issues as the data for each country in the Gapminder collection are likely influenced by each other. We'll acknowledge this and proceed on with the other assumptions.  
+To determine independence, we must know how the data was collected. There are likely independence issues as the data for each country in the Gapminder collection are likely influenced by each other. We will acknowledge this and proceed on with the other assumptions.  
 
 Other Assumptions:
 
 To verify the other assumptions, we need to create two plots. The residual plots and a qqplot.
 
-To create the plots, we'll rely on the `lindia` [@lindia] package that makes diagnostic plots easy. If you do not have it installed already, execute `install.packages("lindia)`.
+To create the plots, we will rely on the `lindia` [@lindia] package that makes diagnostic plots easy. If you do not have it installed already, execute `install.packages("lindia)`.
 
 ```{r lindia, fig.width=8, fig.height=8, dpi=600, message=FALSE, warning=FALSE}
 library(lindia)
@@ -452,7 +452,7 @@ The linearity assumption, however, seems to be violated at the `gdpPercap` and w
 
 #### Transformations and Residual Revaluation
 
-From our previous critique, and after some instruction on how to interpret the results, students should have all the information available to them to make decisions about how to improve their model. To improve our example analysis, we'll apply a transformation on `gdpPercap` to improve linearity and normality of errors. A transformation on the *y* variable is not necessary as we have no issues with constant variance and the Boxcox plot shows no value of lambda that maximizes the log-likelihood of our model. 
+From our previous critique, and after some instruction on how to interpret the results, students should have all the information available to them to make decisions about how to improve their model. To improve our example analysis, we will apply a transformation on `gdpPercap` to improve linearity and normality of errors. A transformation on the *y* variable is not necessary as we have no issues with constant variance and the Boxcox plot shows no value of lambda that maximizes the log-likelihood of our model. 
 
 ```{r modadj}
 modeladj = lm(formula = lifeExp ~ log(gdpPercap) + year, data = gapminder)
@@ -471,6 +471,6 @@ While there is more work to be done to validate this model, we can see that our 
 
 ## Conclusion
 
-R, along with supporting CRAN packages can be an excellent platform on which to teach analysis and modeling to students. The RStudio.cloud online environment is a solid hosted platform that helps reduce the friction of getting students started with R and add on packages from CRAN like `tidyverse`, `lindia`, `GGally`, and `esquisse` can be combined together in a teaching environment to help students get tangible results quickly. We've found that students are willing to learn a considerable amount of R if we can make the on ramp to the basics quick and easy. We hope these tools help you and your students get up and running quickly with using R for data analysis and modeling. We wholeheartedly believe Adam Smith will be pleased to see the ease of the masters and the ease of the students aligned 
+R, along with supporting CRAN packages can be an excellent platform on which to teach analysis and modeling to students. The RStudio.cloud online environment is a solid hosted platform that helps reduce the friction of getting students started with R and add on packages from CRAN like `tidyverse`, `lindia`, `GGally`, and `esquisse` can be combined together in a teaching environment to help students get tangible results quickly. We have found that students are willing to learn a considerable amount of R if we can make the on ramp to the basics quick and easy. We hope these tools help you and your students get up and running quickly with using R for data analysis and modeling. We wholeheartedly believe Adam Smith will be pleased to see the ease of the masters and the ease of the students aligned 
 
 # Bibliography
