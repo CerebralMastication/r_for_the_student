@@ -450,10 +450,10 @@ Variance of the residuals appears to remain constant at all levels of each *x* v
 
 **Linear Relationships:**
 
-The linearity assumption, however, seems to be violated at the `gdpPercap` and we also see evidence of this in the residuals vs fitted plot. 
+The linearity assumption, however, seems to be violated at the `gdpPercap` variable and we also see evidence of this in the residuals vs fitted plot.  In both plots, instead of seeing a patternless array of errors, we see an arching trend indicating a non-linear relationship between at least one of the x variables and `lifeExp`.  The residuals start negative, peak in the positive and then taper off negative again as each value on the x asis increases.  
 
-*** Dusty, can you take a stab at this feedback item? ***
-"It would be useful to briefly explain what you observe that clues you into there being a problem."
+<!-- *** Dusty, can you take a stab at this feedback item? *** -->
+<!-- "It would be useful to briefly explain what you observe that clues you into there being a problem." -->
 
 #### Transformations and Residual Revaluation
 
